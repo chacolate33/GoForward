@@ -1,4 +1,5 @@
     <% if user_signed_in? %>
+    <%= test %>
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
