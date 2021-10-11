@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :messages
   has_many :entries
   # relationshipはまだ
+  # has_many :relationships
+  # has_many :followings
+  
+  attachment :image
   
   
 end
