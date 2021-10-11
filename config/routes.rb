@@ -1,64 +1,46 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'comments/destroy'
+  devise_for :admins
+  devise_for :users
+  
+  root to: 'homes#top'
+  
+  get 'users/confirm' => 'users#confirm', as: 'confirm'
+  get 'users/leave' => 'users#leave', as: 'leave'
+  resources :users, only: [:show, :edit, :update] do
+    get 'followers' => 'relationships#followers', as: 'followers'
+    get 'following' => 'relationships#followings', as: 'followings'
+    resources :relationships, only: [:create, :destroy]
   end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/update'
+
+  get 'groups/match'
+  get 'groups/password'
+  resources :groups do
+    resources :phrases, except: [:new] do
+      resources :favorites, only: [:create, :destroy]
+      resources :bookmarks, only: [:index, :create, :destroy]
+      resources :knowledges, except: [:index] do
+        resources :comments, only: [:create, :destroy]
+      end
+    end
   end
-  namespace :admin do
-    get 'knowledges/show'
-    get 'knowledges/destroy'
-  end
-  namespace :admin do
-    get 'phrases/index'
-    get 'phrases/show'
-  end
-  namespace :admin do
-    get 'groups/show'
-    get 'groups/destroy'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  get 'knowledges/new'
-  get 'knowledges/create'
-  get 'knowledges/edit'
-  get 'knowledges/update'
-  get 'knowledges/show'
-  get 'knowledges/destroy'
+  
+  resources :group_users, only: [:create, :destroy] 
   
   get 'searches/search'
   
-  get 'groups/new'
-  get 'groups/match'
-  get 'groups/create'
-  get 'groups/edit'
-  get 'groups/update'
-  get 'groups/destroy'
-  get 'groups/show'
-  get 'groups/index'
-  get 'groups/password'
   
-  get 'users/show'
-  get 'users/confirm'
-  get 'users/leave'
-  get 'users/edit'
-  get 'users/update'
+  namespace :admin do
+    root to: 'homes/top'
   
-  get 'bookmarks/index'
-  get 'bookmarks/create'
-  get 'bookmarks/destroy'
+    resources :users, only: [:index, :show, :update]
+    resources :group, only: [:show, :destroy] do
+      resources :phrases, only: [:index, :show] do
+        resources :knowledges, only: [:show, :destroy] do
+          get 'comments/destroy'
+        end
+      end
+    end 
   
-  get 'phrases/show'
-  get 'phrases/destroy'
-  get 'phrases/edit'
-  get 'phrases/update'
-  get 'phrases/index'
-  get 'phrases/create'
-  devise_for :admins
-  devise_for :users
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'homes#top'
 end
