@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'my_phrases/index'
   devise_for :admins
   devise_for :users
   
@@ -17,13 +18,14 @@ Rails.application.routes.draw do
   resources :groups do
     resources :phrases, except: [:new] do
       resources :favorites, only: [:create, :destroy]
-      resources :bookmarks, only: [:index, :create, :destroy]
+      resources :bookmarks, only: [:create, :destroy]
       resources :knowledges, except: [:index] do
         resources :comments, only: [:create, :destroy]
       end
     end
   end
   
+  get 'my_phrases' => 'my_phrases#index', as: 'my_phrases'
   resources :group_users, only: [:create, :destroy] 
   
   get 'searches/search' => 'groups#search', as: 'search'
