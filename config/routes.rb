@@ -1,11 +1,36 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'comments/destroy'
+  end
+  namespace :admin do
+    get 'users/index'
+    get 'users/show'
+    get 'users/update'
+  end
+  namespace :admin do
+    get 'knowledges/show'
+    get 'knowledges/destroy'
+  end
+  namespace :admin do
+    get 'phrases/index'
+    get 'phrases/show'
+  end
+  namespace :admin do
+    get 'groups/show'
+    get 'groups/destroy'
+  end
+  namespace :admin do
+    get 'homes/top'
+  end
   get 'knowledges/new'
   get 'knowledges/create'
   get 'knowledges/edit'
   get 'knowledges/update'
   get 'knowledges/show'
   get 'knowledges/destroy'
+  
   get 'searches/search'
+  
   get 'groups/new'
   get 'groups/match'
   get 'groups/create'
@@ -15,6 +40,7 @@ Rails.application.routes.draw do
   get 'groups/show'
   get 'groups/index'
   get 'groups/password'
+  
   get 'users/show'
   get 'users/confirm'
   get 'users/leave'
