@@ -1,0 +1,2 @@
+module MyPhrasesHelper
+end
