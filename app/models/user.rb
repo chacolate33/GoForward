@@ -9,14 +9,17 @@ class User < ApplicationRecord
   has_many :knowledges
   has_many :comments
   has_many :group_users
+  has_many :groups, through: :group_users
   has_many :favorites
   has_many :bookmarks
   has_many :messages
   has_many :entries
+  
   # relationshipはまだ
   # has_many :relationships
   # has_many :followings
   
+  # 画像up用
   attachment :image
   
   

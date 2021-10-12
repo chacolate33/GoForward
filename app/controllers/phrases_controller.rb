@@ -12,6 +12,7 @@ class PhrasesController < ApplicationController
   end
 
   def index
+    @group = Group.find(params[:group_id])
   end
 
   def create

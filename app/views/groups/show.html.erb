@@ -1,2 +1,55 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
+<div class="container">
+  <h1>Group detail</h1>
+  <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
+  <table>
+    <tbody>
+      <tr>
+        <th>Group Name</th>
+        <td><%= @group.name %></td>
+      </tr>
+      <tr>
+        <th>Intro</th>
+        <td><%= @group.introduction %></td>
+      </tr>
+      <tr>
+        <th>Leader</th>
+        <td><%= link_to @leader.name, user_path(@leader.id) %></td>
+      </tr>
+      <tr></tr>
+      <tr></tr>
+    </tbody>
+  </table>
+  
+  <!--退出のリンクへ飛ぶためにIDを定義-->
+   <% if GroupUser.exists?(group_id: @group.id, user_id: current_user.id) %>
+    <% group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id) %>
+    <% id = group_user.id %>
+   <% end %>
+  <% if @group.leader_id != current_user.id %>
+    <% if GroupUser.exists?(group_id: @group.id, user_id: current_user.id) %>
+      <%= link_to "退出する", group_user_path(id: id, group_id: @group.id), method: :delete %>
+    <% else %>
+      <%= link_to "入る", group_users_path(group_id: @group.id), method: :post %>
+    <% end %>
+  <% end %>
+  
+  <h2>Member</h2>
+  <table>
+    <tbody>
+      <% @users.each do |user|%>
+        <tr>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= attachment_image_tag user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+              <%= user.name %>
+            <% end %>
+          </td>
+          <td>
+            フォローボタン
+          </td>
+          <td></td>
+        <tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

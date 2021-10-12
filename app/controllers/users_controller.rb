@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
   def show
+    @group_users = GroupUser.where(user_id: current_user.id)
+    @groups = []
+    @group_users.each do |group_user|
+      group = Group.find_by(id: group_user.group_id)
+      @groups.push(group)
+    end
   end
 
   def confirm
