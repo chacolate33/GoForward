@@ -3,10 +3,19 @@
   <div>
     <%= @phrase.content %>  
     <%= @phrase.japanese %>  
+    <% if @phrase.user_id == current_user.id %>
+      <%= link_to "edit", edit_group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), class: 'btn btn-success' %>
+      <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
+    <% end %>
   </div>
-  <div>
-    
-  </div>
+  <h3>周辺知識一覧</h3>
+  <%= @knowledges.each do |knowledge| %>
+    <div>
+      <%= knowledge.content %>
+      <p>コメント数表示</p>
+    </div>
+  <% end %>
+
   
   
 </div>

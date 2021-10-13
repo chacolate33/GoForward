@@ -1,9 +1,31 @@
 <div class="container">
-
-  <h2><%= @user.name %>'s page</h2>
+  <% if @user == current_user %>
+    <h2>Your Page</h2>
+  <% else %>
+    <h2><%= @user.name %>'s Page</h2>
+  <% end %>
+  <!--ユーザーの情報-->
+  <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
+   <table>
+    <tbody>
+      <tr>
+        <th>User Name</th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th>Intro</th>
+        <td><%= @user.introduction %></td>
+      </tr>
+      <tr>
+        <td>フォローボタン</td>
+      </tr>
+    </tbody>
+  </table>
   
-  
-
+  <% if @user == current_user %>
+    <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
+  <% end %>
+  <br>
   <%= link_to "グループを作成する", new_group_path, class: "btn btn-success" %>
 
   <h2>所属グループ一覧</h2>
