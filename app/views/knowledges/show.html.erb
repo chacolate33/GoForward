@@ -9,4 +9,30 @@
     <br>
     <%= @knowledge.content %>
   </div>
+  <div>
+    <h4>コメント</h4>
+    <%= form_with url: group_phrase_knowledge_comments_path(knowledge_id: @knowledge.id), local:true do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-success' %>
+      </div>
+    <% end %>
+    
+    <% @comments.each do |comment| %>
+      <%= link_to user_path(comment.user.id) do %>
+        <%= attachment_image_tag comment.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+        <%= comment.user.name %>
+       <% end %>
+      <br>
+      <%= comment.content %>
+      
+      <% if comment.user == current_user %>
+        <%= link_to "delete", group_phrase_knowledge_comment_path(knowledge_id: comment.knowledge_id, id: comment.id), method: :delete, class:'btn btn-danger' %>
+      <% end %>
+      <br>
+    <% end %>
+    
+  </div>
 </div>
