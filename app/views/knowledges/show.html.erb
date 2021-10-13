@@ -1,2 +1,12 @@
-<h1>Knowledges#show</h1>
-<p>Find me in app/views/knowledges/show.html.erb</p>
+<div class="container">
+  <div>
+    <%= @phrase.content %>
+    <br>
+    <%= @phrase.japanese %>
+  </div>
+  <div>
+    <%= @knowledge.status %>
+    <br>
+    <%= @knowledge.content %>
+  </div>
+</div>

@@ -1,21 +1,20 @@
 <div class="container">
-  <h2>フレーズ詳細</h2>
-  <div>
-    <%= @phrase.content %>  
-    <%= @phrase.japanese %>  
-    <% if @phrase.user_id == current_user.id %>
-      <%= link_to "edit", edit_group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), class: 'btn btn-success' %>
-      <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
-    <% end %>
-  </div>
-  <h3>周辺知識一覧</h3>
-  <%= @knowledges.each do |knowledge| %>
-    <div>
-      <%= knowledge.content %>
-      <p>コメント数表示</p>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>フレーズ詳細</h2>
+      <%= @phrase.content %>  
+      <%= @phrase.japanese %>  
+      <% if @phrase.user_id == current_user.id %>
+        <%= link_to "edit", edit_group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), class: 'btn btn-success' %>
+        <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
+      <% end %>
+    
+      <h3>周辺知識一覧</h3>
+      <%= render "knowledges/index", knowledges: @knowledges %>
     </div>
-  <% end %>
-
-  
-  
+    <div class="col-md-3">
+      <h2>新規周辺知識</h2>
+      <%= render "knowledges/form", knowledge: @knowledge, phrase: @phrase %>
+    </div>
+  </div>
 </div>

@@ -2,6 +2,7 @@ class PhrasesController < ApplicationController
   def show
     @phrase = Phrase.find(params[:id])
     @knowledges = Knowledge.where(phrase_id: @phrase.id)
+    @knowledge = Knowledge.new
   end
 
   def destroy
