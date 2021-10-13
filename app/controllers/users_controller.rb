@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def show
+    @user = User.find(params[:id])
     @group_users = GroupUser.where(user_id: current_user.id)
     @groups = []
     @group_users.each do |group_user|
