@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    Group.update(group_params)
+    @group.update(group_params)
     if @group.save
       flash[:notice] = "You have updated group successfully."
       redirect_to group_path(@group.id)

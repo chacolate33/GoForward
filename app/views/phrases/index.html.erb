@@ -1,6 +1,13 @@
 <div class="container">
-  <h1><%= @group.name %>のフレーズ一覧</h1>
-  <div>
-    
+  <div class="row">
+    <div class="col-md-8">
+      <h2><%= @group.name %>のフレーズ一覧</h2>
+      
+      <%= render 'index', phrases: @phrases %>
+    </div>
+    <div class="col-md-3">
+      <h2>新規フレーズ</h2>
+      <%= render 'form', phrase: @phrase %>
+    </div>
   </div>
 </div>

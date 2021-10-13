@@ -1,2 +1,16 @@
-<h1>Phrases#edit</h1>
-<p>Find me in app/views/phrases/edit.html.erb</p>
+<div class="container">
+  <h2>フレーズ編集</h2>
+  <%= form_with url: group_phrase_path(id: @phrase.id), method: :patch, local:true do |f| %>
+    <div class="form-group">
+      <%= f.label :content %>
+      <%= f.text_field :content, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :japanese %>
+      <%= f.text_field :japanese, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-success' %>
+    </div>
+  <% end %>
+</div>

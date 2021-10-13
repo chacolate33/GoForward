@@ -1,37 +1,6 @@
-<div class="container">
-  <% if @user == current_user %>
-    <h2>Your Page</h2>
-  <% else %>
-    <h2><%= @user.name %>'s Page</h2>
-  <% end %>
-  <!--ユーザーの情報-->
-  <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
-   <table>
+ <table>
     <tbody>
-      <tr>
-        <th>User Name</th>
-        <td><%= @user.name %></td>
-      </tr>
-      <tr>
-        <th>Intro</th>
-        <td><%= @user.introduction %></td>
-      </tr>
-      <tr>
-        <td>フォローボタン</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <% if @user == current_user %>
-    <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
-  <% end %>
-  <br>
-  <%= link_to "グループを作成する", new_group_path, class: "btn btn-success" %>
-
-  <h2>所属グループ一覧</h2>
-  <table>
-    <tbody>
-      <% @groups.each do |group| %>
+      <% groups.each do |group| %>
         <tr>
           <td>
             <%= link_to group_phrases_path(group.id) do %>
@@ -39,14 +8,14 @@
               <%= group.name %>
             <% end %>
           </td>
-        
+
           <td>
             <% if group.password %>
               <p>パスワードあり</p>
             <% else %>
               <p>パスワードなし</p>
             <% end %>
-          </td> 
+          </td>
           <td>
             <%= link_to group_path(group.id) do %>
             <span>詳しく見る</span>
@@ -54,7 +23,7 @@
           </td>
           <td>
             <% if group.leader_id == current_user.id %>
-               <%= link_to edit_group_path(group.id) do %>
+              <%= link_to edit_group_path(group.id) do %>
                 <span>編集する</span>
               <% end %>
             <% else %>
@@ -63,7 +32,7 @@
                 <% group_user = GroupUser.find_by(group_id: group.id, user_id: current_user.id) %>
                 <% id = group_user.id %>
               <% end %>
-              
+
               <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
                 <%= link_to "退出する", group_user_path(id: id, group_id: group.id), method: :delete %>
               <% else %>
@@ -80,4 +49,3 @@
       <% end %>
     </tbody>
   </table>
-</div>

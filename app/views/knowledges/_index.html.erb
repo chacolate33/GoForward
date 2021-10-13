@@ -1,0 +1,13 @@
+  <% knowledges.each do |knowledge| %>
+    <div>
+      <%= knowledge.content %>
+      <br>
+      <%= knowledge.status %>
+      <p>コメント数表示</p>
+      <%= link_to "details", group_phrase_knowledge_path(group_id: knowledge.phrase.group_id, phrase_id: knowledge.phrase.id, id: knowledge.id) %>
+      <% if knowledge.user_id == current_user.id %>
+        <%= link_to "edit", edit_group_phrase_knowledge_path(group_id: knowledge.phrase.group_id, phrase_id: knowledge.phrase_id, id: knowledge.id), class: 'btn btn-success' %>
+        <%= link_to "delete", group_phrase_knowledge_path(group_id: knowledge.phrase.group_id, phrase_id: knowledge.phrase_id, id: knowledge.id), method: :delete, class: 'btn btn-danger' %>
+      <% end %>
+    </div>
+  <% end %>
