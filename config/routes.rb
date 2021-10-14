@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'users/leave' => 'users#leave', as: 'leave'
   resources :users, only: [:show, :edit, :update] do
     get 'followers' => 'relationships#followers', as: 'followers'
-    get 'following' => 'relationships#followings', as: 'followings'
-    resources :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    resource :relationships, only: [:create, :destroy]
   end
 
   get 'groups/match' => 'groups#match', as: 'match'
