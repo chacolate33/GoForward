@@ -4,6 +4,7 @@ class Knowledge < ApplicationRecord
   belongs_to :phrase
   has_many :comments, dependent: :destroy
   
+  # バリデーション
   validates :content, presence: true
   
   enum status: [:意味・活用形, :イディオム, :例文, :成り立ち, :その他]
