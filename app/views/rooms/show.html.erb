@@ -1,0 +1,39 @@
+<div class="container">
+  <!--どの2人のRoomかを示す-->
+  <% @entries.each do |e| %>
+    <div>
+      <a href="/users/<%= e.user.id %>">
+        <%= attachment_image_tag e.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
+        <%= e.user.name %>
+      </a>
+    </div>
+  <% end %>
+  
+  <div class="chats">
+    <!--DM内容-->
+    <div class="chat">
+      <% if @messages.present? %>
+        <% @messages.each do |m| %>
+          <div>
+            <div class="chat-user">
+               <%= attachment_image_tag m.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40"%>
+               <%= m.user.name %>
+            </div>
+            <div class="chat-content">
+              <%= m.content %><br>
+              <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <!--DM投稿-->
+    <div class="posts">
+      <%= form_for  @message do |f| %>
+        <%= f.text_field :content, placeholder: "メッセージを入力してください", size: 70, class: "form-text-field" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "投稿", class: 'form_submit' %>
+      <% end %>
+    </div>
+  </div>
+</div>

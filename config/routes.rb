@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'my_phrases/index'
+  get 'rooms/create'
+  get 'rooms/show'
+  get 'messages/create'
   devise_for :admins
   devise_for :users
   
@@ -12,6 +14,9 @@ Rails.application.routes.draw do
     get 'followings' => 'relationships#followings', as: 'followings'
     resource :relationships, only: [:create, :destroy]
   end
+  
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
 
   get 'groups/match' => 'groups#match', as: 'match'
   get 'groups/password' => 'groups#password', as: 'password'

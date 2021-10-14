@@ -24,22 +24,40 @@
         <td>followers</td>
         <td><%= link_to user_followers_path(@user.id) do %><%= @user.followers.count %><% end %></td>
       </tr>
-      
-      
-       <% if @user != current_user %>
-        <% if current_user.following?(@user) %>
-          <td>
-            <%= link_to "Unfolow", user_relationships_path(@user.id), method: :delete, class: 'btn btn-danger' %>
-          </td>
-        <% else %>
-          <td>
-            <%= link_to "Follow", user_relationships_path(@user.id), method: :post, class: 'btn btn-primary'%>
-          </td>
-        <% end %>
-       <% end %>
+
+      <tr>
+         <% if @user != current_user %>
+         <!--フォロー登録のボタン-->
+           <% if current_user.following?(@user) %>
+             <td>
+               <%= link_to "Unfolow", user_relationships_path(@user.id), method: :delete, class: 'btn btn-danger' %>
+             </td>
+           <% else %>
+             <td>
+               <%= link_to "Follow", user_relationships_path(@user.id), method: :post, class: 'btn btn-primary'%>
+             </td>
+           <% end %>
+        　<!--DMのためのボタン-->
+           <% if (current_user.following?(@user)) && (@user.following?(current_user)) %>
+             <% if @isRoom == true %>
+               <td><a href="/rooms/<%= @roomId %>" class="btn btn-primary">Chat</a></td>
+             <% else %>
+               <%= form_for @room do |f| %>
+                 <%= f.hidden_field :user_id, value: @user.id %>
+                 <%= fields_for @entry do |e| %>
+                   <%= e.hidden_field :user_id, value: @user.id %>
+                 <% end %>
+                <td><%= f.submit "Chat", class: 'btn btn-primary user-show-chat'%></td>
+               <% end %>
+             <% end %>
+           <% end %>
+
+         <% end %>
+       </tr>
+
     </tbody>
   </table>
-  
+
   <% if @user == current_user %>
     <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
   <% end %>
@@ -57,14 +75,14 @@
               <%= group.name %>
             <% end %>
           </td>
-        
+
           <td>
             <% if group.password %>
               <p>パスワードあり</p>
             <% else %>
               <p>パスワードなし</p>
             <% end %>
-          </td> 
+          </td>
           <td>
             <%= link_to group_path(group.id) do %>
             <span>詳しく見る</span>
@@ -81,7 +99,7 @@
                 <% group_user = GroupUser.find_by(group_id: group.id, user_id: current_user.id) %>
                 <% id = group_user.id %>
               <% end %>
-              
+
               <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
                 <%= link_to "退出する", group_user_path(id: id, group_id: group.id), method: :delete %>
               <% else %>
