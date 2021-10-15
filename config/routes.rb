@@ -20,10 +20,10 @@ Rails.application.routes.draw do
   get 'groups/password' => 'groups#password', as: 'password'
   resources :groups do
     resources :phrases, except: [:new] do
-      resources :favorites, only: [:create, :destroy]
       resource :bookmarks, only: [:create, :destroy]
       resources :knowledges, except: [:index] do
         resources :comments, only: [:create, :destroy]
+        resource :favorites, only: [:create, :destroy]
       end
     end
   end

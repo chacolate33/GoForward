@@ -2,10 +2,15 @@ class Knowledge < ApplicationRecord
   # アソシエーション
   belongs_to :user
   belongs_to :phrase
+  has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   
   # バリデーション
   validates :content, presence: true
+  
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
   
   enum status: [:意味・活用形, :イディオム, :例文, :成り立ち, :その他]
   

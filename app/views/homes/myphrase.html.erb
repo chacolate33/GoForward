@@ -6,9 +6,11 @@
        <%= attachment_image_tag bookmark.phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40"%>
        <%= bookmark.phrase.user.name %>
       <% end %>
-
-      <%= bookmark.phrase.content %>
-      <%= bookmark.phrase.japanese %>
+      
+      <%= link_to group_phrase_path(group_id: bookmark.phrase.group_id, id: bookmark.phrase_id) do %>
+        <%= bookmark.phrase.content %>
+        <%= bookmark.phrase.japanese %>
+      <% end %>
 
       <% if bookmark.phrase.bookmarked_by?(current_user) %>
         <%= link_to group_phrase_bookmarks_path(group_id: bookmark.phrase.group.id, phrase_id: bookmark.phrase.id), method: :delete do %>
