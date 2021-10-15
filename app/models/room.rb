@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
   # アソシエーション
-  has_many :messages
-  has_many :entries
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 end
