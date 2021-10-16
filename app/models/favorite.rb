@@ -1,5 +1,5 @@
 class Favorite < ApplicationRecord
   # アソシエーション
   belongs_to :user
-  belongs_to :phrase
+  belongs_to :knowledge
 end

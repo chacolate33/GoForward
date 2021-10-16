@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :group_users
   has_many :groups, through: :group_users
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
@@ -34,6 +34,15 @@ class User < ApplicationRecord
   
   def following?(user)
     followings.include?(user)
+  end
+  # 退会済みアカウントが同じアカウントでログインできないようにする制約
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+  
+  # 検索用
+  def self.search_for(value)
+    User.where('name LIKE?', '%' + value + '%')
   end
   
 end

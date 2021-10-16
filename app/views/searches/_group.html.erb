@@ -1,0 +1,15 @@
+<table>
+  <% groups.each do |group| %>
+    <tr>
+      <td>
+        <%= link_to group_path(group) do %>
+          <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40" %>
+          <%= group.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= group.introduction %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations', 
+  }
 
   root to: 'homes#top'
   get 'homes/myphrase' => 'homes#myphrase', as: 'myphrase'
 
-  get 'users/confirm' => 'users#confirm', as: 'confirm'
-  get 'users/leave' => 'users#leave', as: 'leave'
+  patch '/leave' => 'users#leave', as: 'leave'
+  get '/confirm' => 'users#confirm', as: 'confirm'
   resources :users, only: [:show, :edit, :update] do
     get 'followers' => 'relationships#followers', as: 'followers'
     get 'followings' => 'relationships#followings', as: 'followings'
@@ -20,17 +24,17 @@ Rails.application.routes.draw do
   get 'groups/password' => 'groups#password', as: 'password'
   resources :groups do
     resources :phrases, except: [:new] do
-      resources :favorites, only: [:create, :destroy]
       resource :bookmarks, only: [:create, :destroy]
       resources :knowledges, except: [:index] do
         resources :comments, only: [:create, :destroy]
+        resource :favorites, only: [:create, :destroy]
       end
     end
   end
 
   resources :group_users, only: [:create, :destroy]
 
-  get 'searches/search' => 'groups#search', as: 'search'
+  get 'searches/search' => 'searches#search', as: 'search'
 
 
   namespace :admin do
