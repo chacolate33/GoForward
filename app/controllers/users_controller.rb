@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       group = Group.find_by(id: group_user.group_id)
       @groups.push(group)
     end
-    
+
     # 以下DM機能の記述
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
@@ -32,6 +32,11 @@ class UsersController < ApplicationController
   end
 
   def leave
+    @user = current_user
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
   end
 
   def edit
@@ -47,12 +52,12 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-      
+
   end
-  
+
   private
-  
-  def user_params 
+
+  def user_params
     params.require(:user).permit(:name, :introduction, :image)
   end
 end
