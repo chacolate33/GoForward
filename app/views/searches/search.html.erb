@@ -1,2 +1,15 @@
-<h1>Searches#search</h1>
-<p>Find me in app/views/searches/search.html.erb</p>
+<div class="container">
+  <% unless @value == "" %>
+    <% if @category == 'User' %>
+      <%= render 'user' users: @users %>
+    <% elsif @category == 'Group' %>
+      <%= render 'group' groups: @groups %>
+    <% else %>
+      <%= render 'phrase' phrases: @phrases %>
+    <% end %>
+  <% else %>
+    <div>
+      <h2>検索ワードを入力してください。</h2>
+    </div>
+  <% end %>
+</div>
