@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   resources :group_users, only: [:create, :destroy]
 
-  get 'searches/search' => 'groups#search', as: 'search'
+  get 'searches/search' => 'searches#search', as: 'search'
 
 
   namespace :admin do

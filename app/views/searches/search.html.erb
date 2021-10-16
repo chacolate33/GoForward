@@ -1,11 +1,11 @@
 <div class="container">
   <% unless @value == "" %>
     <% if @category == 'User' %>
-      <%= render 'user' users: @users %>
+      <%= render 'user', users: @users %>
     <% elsif @category == 'Group' %>
-      <%= render 'group' groups: @groups %>
+      <%= render 'group', groups: @groups %>
     <% else %>
-      <%= render 'phrase' phrases: @phrases %>
+      <%= render 'phrase', phrases: @phrases %>
     <% end %>
   <% else %>
     <div>

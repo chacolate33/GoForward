@@ -8,4 +8,9 @@ class Phrase < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?
   end
+  
+  # 検索用
+  def self.search_for(value)
+    Phrase.where('content LIKE ?', '%' + value + '%')
+  end
 end
