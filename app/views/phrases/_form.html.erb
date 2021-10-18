@@ -1,4 +1,5 @@
-<%= form_with url: group_phrases_path, local:true do |f| %>
+<%= form_with  url: group_phrases_path, local:true do |f| %>
+  <%= render 'layouts/errors', model: phrase %>
   <div class="form-group">
     <%= f.label :content %>
     <%= f.text_field :content, class: 'form-control' %>

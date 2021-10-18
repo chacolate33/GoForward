@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "You have created comment successfully."
       redirect_to request.referer
     else
-      @knowledge = Knowledge.find(params[:id])
+      @knowledge = Knowledge.find(params[:knowledge_id])
       @phrase = Phrase.find_by(id: @knowledge.phrase_id)
       @comments = Comment.where(knowledge_id: @knowledge.id)
       render 'knowledges/show'

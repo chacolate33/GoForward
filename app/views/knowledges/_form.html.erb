@@ -1,4 +1,5 @@
 <%= form_with url: group_phrase_knowledges_path(phrase_id: phrase.id), local:true do |f| %>
+  <%= render 'layouts/errors', model: knowledge %>
   <div class="form-group">
     <%= f.label :content %>
     <%= f.text_area :content, class: 'form-control' %>

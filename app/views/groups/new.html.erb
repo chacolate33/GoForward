@@ -1,7 +1,8 @@
 <div class="container">
   <h1>グループ作成</h1>
-  
+
   <%= form_with model:@group,local:true do |f| %>
+    <%= render 'layouts/errors', model: f.object %>
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
@@ -18,7 +19,7 @@
       <%= f.label :password %>
       <%= f.text_field :password, class: 'form-control', type: 'password' %>
     </div>
-    
+
     <div>
       <%= f.submit "Make Group", class: 'btn-success' %>
     </div>

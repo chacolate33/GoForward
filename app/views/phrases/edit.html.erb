@@ -1,6 +1,7 @@
 <div class="container">
   <h2>フレーズ編集</h2>
   <%= form_with url: group_phrase_path(id: @phrase.id), method: :patch, local:true do |f| %>
+    <%= render 'layouts/errors', model: @phrase %>
     <div class="form-group">
       <%= f.label :content %>
       <%= f.text_field :content, class: 'form-control' %>
