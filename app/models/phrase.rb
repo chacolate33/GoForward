@@ -5,6 +5,10 @@ class Phrase < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :knowledges, dependent: :destroy
   
+  # バリデーション
+  validates :content, presence: true
+  validates :japanese, presence: true
+  
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?
   end

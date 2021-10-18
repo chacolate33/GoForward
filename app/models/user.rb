@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
   
+  # バリデーション
+  validates :name, presence: true
+  
   # 画像up用
   attachment :image
   

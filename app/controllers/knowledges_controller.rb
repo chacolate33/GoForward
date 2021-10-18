@@ -12,6 +12,7 @@ class KnowledgesController < ApplicationController
       redirect_to request.referer
     else
       @phrase = Phrase.find(params[:phrase_id])
+      @knowledges = Knowledge.where(phrase_id: @phrase.id)
       render 'phrases/show'
     end
 
@@ -35,6 +36,7 @@ class KnowledgesController < ApplicationController
   def show
     @knowledge = Knowledge.find(params[:id])
     @phrase = Phrase.find_by(id: @knowledge.phrase_id)
+    @comment = Comment.new
     @comments = Comment.where(knowledge_id: @knowledge.id)
   end
 
