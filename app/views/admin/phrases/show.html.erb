@@ -1,2 +1,13 @@
-<h1>Admin::Phrases#show</h1>
-<p>Find me in app/views/admin/phrases/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>フレーズ詳細</h2>
+      <%= @phrase.content %>  
+      <%= @phrase.japanese %>  
+      <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
+    
+      <h3>周辺知識一覧</h3>
+      <%= render "admin/knowledges/index", knowledges: @knowledges %>
+    </div>
+  </div>
+</div>

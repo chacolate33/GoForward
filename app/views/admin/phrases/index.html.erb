@@ -1,2 +1,8 @@
-<h1>Admin::Phrases#index</h1>
-<p>Find me in app/views/admin/phrases/index.html.erb</p>
+<div class="container">
+    <div>
+      <h2><%= @group.name %>のフレーズ一覧</h2>
+      
+      <%= render 'index', phrases: @phrases %>
+      
+    </div>
+</div>
