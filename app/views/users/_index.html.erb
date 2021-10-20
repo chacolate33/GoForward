@@ -9,6 +9,12 @@
             <% end %>
           </td>
           
+          <% if user.is_deleted == true %>
+            <td>
+              <p>退会中</p>
+            </td>
+          <% end %>
+          
           <% if user != current_user %>
             <% if current_user.following?(user) %>
               <td>

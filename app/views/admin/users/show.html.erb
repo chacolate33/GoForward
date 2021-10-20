@@ -23,9 +23,27 @@
 
     </tbody>
   </table>
-  
-  <!--editのurlはルートがないようなので、一旦消去-->
-  <!--ここでステータスを変えたい-->
+
+  <!--ユーザーステータス変更-->
+  <%= form_with url: admin_user_path, method: :patch, local:true do |f| %>
+    <div class="form-group">
+      <%= f.label :"会員ステータス", class: 'control-label' %>
+      <% if @user.is_deleted == false %>
+        <%= f.radio_button :is_deleted, false, name: 'is_valid', checked: true %>
+        <%= f.label :is_valid, "有効", value: :false, class: 'fas fa-user-check text-success' %>
+        <%= f.radio_button :is_deleted, true, name: 'is_valid' %>
+        <%= f.label :is_valid, "退会", value: :true, class: 'fa fa-user-slash text-danger' %>
+      <% else %>
+        <%= f.radio_button :is_deleted, false, name: 'is_deleted' %>
+        <%= f.label :is_deleted, "有効", value: :false, class: 'fas fa-user-check text-success' %>
+        <%= f.radio_button :is_deleted, true, name: 'is_deleted', checked: true %>
+        <%= f.label :is_deleted, "退会", value: :true, class: 'fas fa-user-check text-danger' %>
+      <% end %>
+    </div>
+    <div>
+      <%= f.submit "編集内容を保存", class: 'btn btn-success' %>
+    </div>
+  <% end %>
 
   <h2>所属グループ一覧</h2>
   <table>

@@ -15,5 +15,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    flash[:notice] = "ユーザー情報を編集しました。"
+    redirect_to request.referer
   end
+  
+  private
+  def user_params
+    params.permit(:is_deleted)
+  end
+  
 end
