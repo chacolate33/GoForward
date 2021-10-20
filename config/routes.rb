@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords', 
+    registrations: 'admins/registrations'
+  }
+  
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
@@ -40,7 +45,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     resources :users, only: [:index, :show, :update]
-    resources :group, only: [:show, :destroy] do
+    resources :groups, only: [:show, :destroy] do
       resources :phrases, only: [:index, :show] do
         resources :knowledges, only: [:show, :destroy] do
           resources :comments, only: [:destroy]

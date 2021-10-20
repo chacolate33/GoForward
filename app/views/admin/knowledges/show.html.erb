@@ -1,2 +1,36 @@
-<h1>Admin::Knowledges#show</h1>
-<p>Find me in app/views/admin/knowledges/show.html.erb</p>
+<div class="container">
+  <div>
+    <%= link_to user_path(@phrase.user) do %>
+      <%= attachment_image_tag @phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40" %>
+      <%= @phrase.user.name %>
+    <% end %>
+    <br>
+    <%= @phrase.content %>
+    <br>
+    <%= @phrase.japanese %>
+
+  </div>
+  <div>
+    <%= @knowledge.status %>
+    <br>
+    <%= @knowledge.content %>
+    <!--いいねボタン・数表示-->
+    <i class="fas fa-heart text-danger"><%= @knowledge.favorites.count %></i>
+  </div>
+  <div>
+    <h4>コメント一覧</h4>
+
+    <% @comments.each do |comment| %>
+      <%= link_to user_path(comment.user.id) do %>
+        <%= attachment_image_tag comment.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+        <%= comment.user.name %>
+       <% end %>
+      <br>
+      <%= comment.content %>
+
+      <%= link_to "delete", group_phrase_knowledge_comment_path(knowledge_id: comment.knowledge_id, id: comment.id), method: :delete, class:'btn btn-danger' %>
+      <br>
+    <% end %>
+
+  </div>
+</div>

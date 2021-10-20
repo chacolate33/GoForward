@@ -7,7 +7,7 @@ class Group < ApplicationRecord
   attachment :image
   
   # バリデーション
-  validates :name, length: { minimum: 2, maximum: 15}
+  validates :name, length: { minimum: 2, maximum: 20}
   validates :introduction, length: { minimum: 1, maximum: 255}
   
   # 検索用
