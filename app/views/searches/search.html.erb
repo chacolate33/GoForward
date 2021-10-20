@@ -1,11 +1,12 @@
 <div class="container">
   <% unless @value == "" %>
+    <h2><%= @value %>を含む検索結果</h2>
     <% if @category == 'User' %>
-      <%= render 'user', users: @users %>
+      <%= render 'users/index', users: @users %>
     <% elsif @category == 'Group' %>
-      <%= render 'group', groups: @groups %>
+      <%= render 'groups/index', groups: @groups %>
     <% else %>
-      <%= render 'phrase', phrases: @phrases %>
+      <%= render 'phrases/index', phrases: @phrases %>
     <% end %>
   <% else %>
     <div>

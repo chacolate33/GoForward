@@ -29,15 +29,15 @@
     <div class="form-group">
       <%= f.label :"会員ステータス", class: 'control-label' %>
       <% if @user.is_deleted == false %>
-        <%= f.radio_button :is_deleted, false, name: 'is_valid', checked: true %>
-        <%= f.label :is_valid, "有効", value: :false, class: 'fas fa-user-check text-success' %>
-        <%= f.radio_button :is_deleted, true, name: 'is_valid' %>
-        <%= f.label :is_valid, "退会", value: :true, class: 'fa fa-user-slash text-danger' %>
+        <%= f.radio_button :is_deleted, false, checked: true %>
+        <%= f.label :is_valid, "有効", class: 'fas fa-user-check text-success' %>
+        <%= f.radio_button :is_deleted, true %>
+        <%= f.label :is_valid, "退会", class: 'fa fa-user-slash text-danger' %>
       <% else %>
-        <%= f.radio_button :is_deleted, false, name: 'is_deleted' %>
-        <%= f.label :is_deleted, "有効", value: :false, class: 'fas fa-user-check text-success' %>
-        <%= f.radio_button :is_deleted, true, name: 'is_deleted', checked: true %>
-        <%= f.label :is_deleted, "退会", value: :true, class: 'fas fa-user-check text-danger' %>
+        <%= f.radio_button :is_deleted, false %>
+        <%= f.label :is_deleted, "有効", class: 'fas fa-user-check text-success' %>
+        <%= f.radio_button :is_deleted, true, checked: true %>
+        <%= f.label :is_deleted, "退会", class: 'fas fa-user-check text-danger' %>
       <% end %>
     </div>
     <div>

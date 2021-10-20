@@ -1,7 +1,7 @@
-class GroupUser < ApplicationRecord
+class Apply < ApplicationRecord
   # アソシエーション
-  belongs_to :group
   belongs_to :user
+  belongs_to :group
   
   # バリデーション
   validates :user_id, presence: true
@@ -9,4 +9,3 @@ class GroupUser < ApplicationRecord
   validates :user_id, uniqueness: {scope: :group_id}
   validates :group_id, uniqueness: {scope: :user_id}
 end
-

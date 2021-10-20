@@ -9,6 +9,15 @@
             <% end %>
           </td>
           
+          <td>
+            follows
+            <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %>
+          </td>
+          <td>
+            followers
+            <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %>
+          </td>
+          
           <% if user.is_deleted == true %>
             <td>
               <p>退会中</p>

@@ -20,10 +20,10 @@ class Admin::UsersController < ApplicationController
     flash[:notice] = "ユーザー情報を編集しました。"
     redirect_to request.referer
   end
-  
+
   private
   def user_params
     params.permit(:is_deleted)
   end
-  
+
 end

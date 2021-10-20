@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'applies/create'
+  get 'applies/destroy'
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords', 
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
   get 'groups/match' => 'groups#match', as: 'match'
   get 'groups/password' => 'groups#password', as: 'password'
   resources :groups do
+    resources :applies, only: [:index, :create, :destroy]
     resources :phrases, except: [:new] do
       resource :bookmarks, only: [:create, :destroy]
       resources :knowledges, except: [:index] do
@@ -53,7 +56,7 @@ Rails.application.routes.draw do
       end
     end
 
-    get '/search' => 'searches#search', as: 'admin_search'
+    get '/search' => 'searches#search', as: 'search'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

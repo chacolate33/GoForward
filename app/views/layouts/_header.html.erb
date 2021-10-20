@@ -19,6 +19,18 @@
                 <% end %>
               </li>
             <% end %>
+            
+            <% if admin_signed_in? %>
+              <li>
+                <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+                  <i class="fas fa-search text-dark"></i>
+                  <%= f.text_field :value, placeholder: "Enter a keyword" %>
+                  <%= f.submit "search" %>
+                  <%= f.select :category, options_for_select({"User" => "User", "Group" => "Group", "Phrase" => "Phrase"}) %>
+                <% end %>
+              </li>
+            <% end %>
+            
 
             <% if user_signed_in? %>
              <!--ユーザーログイン時-->
@@ -42,7 +54,7 @@
                 <%= link_to " User", admin_users_path, class:"fas fa-users nav-link text-light" %>
               </li>
               <li>
-                <%= link_to " Logout", destroy_admin_session_path, method: :delete, class:"fas fa-users nav-link text-light" %>
+                <%= link_to " Logout", destroy_admin_session_path, method: :delete, class:"fas fa-sign-out-alt nav-link text-light" %>
               </li>
             <% else %>
               <li>
