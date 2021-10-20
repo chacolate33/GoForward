@@ -1,0 +1,33 @@
+<table>
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+      <th>メールアドレス</th>
+      <th>会員ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user|%>
+      <tr>
+        <td>
+          <%= link_to admin_user_path(user.id) do %>
+            <%= attachment_image_tag user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+            <%= user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        
+        <td>
+        <% if user.is_deleted == false %>
+            <p>有効</p>
+          <% else %>
+            <p>無効</p>
+          <% end %>  
+        </td>
+        
+      <tr>
+    <% end %>
+  </tbody>
+</table>
