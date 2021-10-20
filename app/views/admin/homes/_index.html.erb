@@ -1,32 +1,32 @@
 <table>
-    <tbody>
-      <% groups.each do |group| %>
-        <tr>
-          <td>
-            <%= link_to admin_group_phrases_path(group.id) do %>
-              <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
-              <%= group.name %>
-            <% end %>
-          </td>
+  <tbody>
+    <% groups.each do |group| %>
+      <tr>
+        <td>
+          <%= link_to admin_group_phrases_path(group.id) do %>
+            <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+            <%= group.name %>
+          <% end %>
+        </td>
 
-          <td>
-            <% if group.password %>
-              <p>パスワードあり</p>
-            <% else %>
-              <p>パスワードなし</p>
-            <% end %>
-          </td>
-          
-          <td>
-            <%= link_to admin_group_path(group.id) do %>
-            <span>詳しく見る</span>
-            <% end %>
-          </td>
+        <td>
+          <% if group.password %>
+            <p>パスワードあり</p>
+          <% else %>
+            <p>パスワードなし</p>
+          <% end %>
+        </td>
+        
+        <td>
+          <%= link_to admin_group_path(group.id) do %>
+          <span>詳しく見る</span>
+          <% end %>
+        </td>
 
-          <td>
-            <%= link_to "削除する", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <td>
+          <%= link_to "削除する", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

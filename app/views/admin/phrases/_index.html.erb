@@ -4,7 +4,6 @@
       <%= attachment_image_tag phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40" %>
       <%= phrase.user.name %>
     <% end %>
-    <br>
     <%= phrase.content %>
     <%= phrase.japanese %>
     <%= link_to "details", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>

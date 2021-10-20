@@ -1,20 +1,20 @@
-    <% @phrases.each do |phrase| %>
-        <div>
-          <%= phrase.content %>
-          <%= phrase.japanese %>
-          <% if phrase.bookmarked_by?(current_user) %>
-            <%= link_to group_phrase_bookmarks_path(phrase_id: phrase.id), method: :delete do %>
-              <i class="fas fa-star"></i>            
-            <% end %>
-          <% else %>
-            <%= link_to group_phrase_bookmarks_path(phrase_id: phrase.id), method: :post do %>
-              <i class="far fa-star"></i>
-            <% end %>
-          <% end %>
-          <%= link_to "details", group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>
-          <% if phrase.user_id == current_user.id %>
-            <%= link_to "edit", edit_group_phrase_path(group_id: phrase.group_id, id: phrase.id), class: 'btn btn-success' %>
-            <%= link_to "delete", group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
-          <% end %>
-        </div>
+<% @phrases.each do |phrase| %>
+  <div>
+    <%= phrase.content %>
+    <%= phrase.japanese %>
+    <% if phrase.bookmarked_by?(current_user) %>
+      <%= link_to group_phrase_bookmarks_path(group_id: phrase.group_id, phrase_id: phrase.id), method: :delete do %>
+        <i class="fas fa-star"></i>            
+      <% end %>
+    <% else %>
+      <%= link_to group_phrase_bookmarks_path(group_id: phrase.group_id, phrase_id: phrase.id), method: :post do %>
+        <i class="far fa-star"></i>
+      <% end %>
     <% end %>
+    <%= link_to "details", group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>
+    <% if phrase.user_id == current_user.id %>
+      <%= link_to "edit", edit_group_phrase_path(group_id: phrase.group_id, id: phrase.id), class: 'btn btn-success' %>
+      <%= link_to "delete", group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+<% end %>
