@@ -8,14 +8,6 @@
               <%= group.name %>
             <% end %>
           </td>
-
-          <td>
-            <% if group.password %>
-              <p>パスワードあり</p>
-            <% else %>
-              <p>パスワードなし</p>
-            <% end %>
-          </td>
           <td>
             <%= link_to group_path(group.id) do %>
             <span>詳しく見る</span>
@@ -23,9 +15,7 @@
           </td>
           <td>
             <% if group.leader_id == current_user.id %>
-              <%= link_to edit_group_path(group.id) do %>
-                <span>編集する</span>
-              <% end %>
+              <%= link_to "編集する", edit_group_path(group.id), class: 'btn btn-primary' %>
             <% else %>
               <!--退出のリンクへ飛ぶためにIDを定義-->
               <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
@@ -34,9 +24,7 @@
               <% end %>
 
               <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
-                <%= link_to "退出する", group_user_path(id: id, group_id: group.id), method: :delete %>
-              <% else %>
-                <%= link_to "入る", group_users_path(group_id: group.id), method: :post %>
+                <%= link_to "退出する", group_user_path(id: id, group_id: group.id), method: :delete, class: 'btn btn-danger' %>
               <% end %>
             <% end %>
           </td>

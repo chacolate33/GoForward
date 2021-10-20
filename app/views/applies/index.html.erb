@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>承認待ちユーザー一覧</h2>
+  <% @applies.each do |app| %>
+    <%= link_to user_path(app.user) do %>
+       <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40"%>
+       <%= app.user.name %>
+    <% end %>
+
+    <%= link_to "承認", group_users_path(group_id: app.group_id, user_id: app.user_id, apply_id: app.id), method: :post, class: 'btn btn-success' %>
+    <%= link_to "却下", group_apply_path(app.group, app), method: :delete, class: 'btn btn-danger text-line-none' %>
+  <% end %>
+</div>
