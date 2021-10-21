@@ -27,8 +27,6 @@ Rails.application.routes.draw do
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :show]
 
-  get 'groups/match' => 'groups#match', as: 'match'
-  get 'groups/password' => 'groups#password', as: 'password'
   resources :groups do
     resources :applies, only: [:index, :create, :destroy]
     resources :phrases, except: [:new] do

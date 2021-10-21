@@ -39,6 +39,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @leader = User.find_by(id: @group.leader_id)
     
+    @apply = Apply.find_by(group_id: @group.id, user_id: current_user.id)
     # 所属ユーザー一覧表示
     @group_users = GroupUser.where(group_id: @group.id)
     @users = []
@@ -57,14 +58,6 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group.destroy
     redirect_to request.referer
-  end
-
-
-
-  def password
-  end
-  
-  def match
   end
   
   private
