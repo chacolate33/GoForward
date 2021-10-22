@@ -1,8 +1,8 @@
-<div class="container">
-
-  <h1>Group</h1>
+<div class="container my-3">
+  <h2>Group</h2>
 
   <%= link_to "グループを作る", new_group_path, class: "btn btn-success" %>
-
-  <%= render "index", groups: @groups %>
+  <div class="my-3">
+    <%= render "index", groups: @groups %>
+  </div>
 </div>

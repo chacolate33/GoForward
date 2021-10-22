@@ -1,4 +1,12 @@
  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Introduction</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+
     <tbody>
       <% groups.each do |group| %>
         <tr>
@@ -9,13 +17,16 @@
             <% end %>
           </td>
           <td>
+            <%= group.introduction.truncate(20) %>
+          </td>
+          <td>
             <%= link_to group_path(group.id) do %>
-            <span>詳しく見る</span>
+            <span>Details</span>
             <% end %>
           </td>
           <td>
             <% if group.leader_id == current_user.id %>
-              <%= link_to "編集する", edit_group_path(group.id), class: 'btn btn-primary' %>
+              <%= link_to "Edit", edit_group_path(group.id), class: 'btn btn-primary' %>
             <% else %>
               <!--退出のリンクへ飛ぶためにIDを定義-->
               <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
@@ -30,7 +41,7 @@
           </td>
           <% if group.leader_id == current_user.id %>
             <td>
-              <%= link_to "削除する", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
+              <%= link_to "Delete", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
             </td>
           <% end %>
         </tr>
