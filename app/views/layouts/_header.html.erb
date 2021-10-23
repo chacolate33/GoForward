@@ -1,0 +1,72 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ea9033">
+      <div class="container">
+        <a class="navbar-bland" href="/">
+          <span class="text-light">Go Forward</span>
+        </a>
+        <!--検索欄-->
+        <div class="mx-3">
+          <% if user_signed_in? %>
+              <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <i class="fas fa-search text-dark"></i>
+                <%= f.text_field :value, placeholder: "Enter a keyword" %>
+                <%= f.submit "search", class: "search_submit" %>
+                <%= f.select :category, options_for_select({"User" => "User", "Group" => "Group", "Phrase" => "Phrase"}) %>
+              <% end %>
+          <% end %>
+        </div>
+        <div class="mx-3">
+          <% if admin_signed_in? %>
+              <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+                <i class="fas fa-search text-dark"></i>
+                <%= f.text_field :value, placeholder: "Enter a keyword" %>
+                <%= f.submit "search", class: "search_submit" %>
+                <%= f.select :category, options_for_select({"User" => "User", "Group" => "Group", "Phrase" => "Phrase"}) %>
+              <% end %>
+          <% end %>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+
+            <% if user_signed_in? %>
+             <!--ユーザーログイン時-->
+              <li>
+                <%= link_to " Group", groups_path, class:"fas fa-users nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to " Bookmark", myphrase_path, class:"fas fa-star nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to " MyPage", user_path(current_user.id), class:"fas fa-user nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to " Logout", destroy_user_session_path, method: :delete, class:"fas fa-sign-out-alt nav-link text-light" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li>
+                <%= link_to " Group", admin_root_path, class:"fas fa-users nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to " User", admin_users_path, class:"fas fa-users nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to " Logout", destroy_admin_session_path, method: :delete, class:"fas fa-sign-out-alt nav-link text-light" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to " sign up", new_user_registration_path, class:"fas fa-user-plus nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to " login", new_user_session_path, class:"fas fa-sign-in-alt nav-link text-light" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+

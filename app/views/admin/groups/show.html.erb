@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Group detail</h2>
+  <!--グループの情報-->
+  <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
+  <table>
+    <tbody>
+      <tr>
+        <th>Group Name</th>
+        <td><%= @group.name %></td>
+      </tr>
+      <tr>
+        <th>Intro</th>
+        <td><%= @group.introduction %></td>
+      </tr>
+      <tr>
+        <th>Leader</th>
+        <td><%= link_to @leader.name, admin_user_path(@leader.id) %></td>
+      </tr>
+      <tr></tr>
+      <tr></tr>
+    </tbody>
+  </table>
+  
+  <h2>Member</h2>
+  <table>
+    <tbody>
+      <% @users.each do |user|%>
+        <tr>
+          <td>
+            <%= link_to admin_user_path(user.id) do %>
+              <%= attachment_image_tag user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+              <%= user.name %>
+            <% end %>
+          </td>
+        <tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,14 @@
+<div class="container my-3">
+  <div class="row">
+    <div class="col-8">
+      <h2><%= @group.name %>'s Phrases</h2>
+      <div class="my-3">
+        <%= render 'index', phrases: @phrases %>
+      </div>
+    </div>
+    <div class="col-4">
+      <h2>New Phrase</h2>
+      <%= render 'form', phrase: @phrase %>
+    </div>
+  </div>
+</div>

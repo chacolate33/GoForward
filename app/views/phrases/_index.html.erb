@@ -1,0 +1,26 @@
+<% phrases.each do |phrase| %>
+  <div class="container border py-2 pl-4 my-3">
+
+    <div class="container">
+      <div class="row">
+        <!--ブックマーク-->
+        <div class="col-1">
+          <%= render 'bookmarks/button', phrase: phrase %>
+        </div>
+        <div class="col-11">
+        <!--英語と訳-->
+          <h3><%= phrase.content.truncate(15) %></h3>
+          <h3><%= phrase.japanese.truncate(15) %></h3>
+        </div>
+      </div>
+    </div>
+      <div>
+        <span>知識<%= phrase.knowledges.count %>件</span>
+        <%= link_to "Details", group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>
+        <% if phrase.user_id == current_user.id %>
+          <%= link_to "Edit", edit_group_phrase_path(group_id: phrase.group_id, id: phrase.id), class: 'btn btn-success' %>
+          <%= link_to "Delete", group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+  </div>
+<% end %>

@@ -1,0 +1,51 @@
+<div class="container my-3">
+  <!--どの2人のRoomかを示す-->
+  <% @entries.each do |e| %>
+    <div>
+      <% if e.user != current_user %>
+        <h3>
+          Chat with 
+          <%= link_to user_path(e.user) do %>
+            <%= e.user.name %>
+          <% end %>
+        </h3>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div class="chats">
+    <!--DM内容-->
+    <div class="chat">
+      <% if @messages.present? %>
+        <% @messages.each do |m| %>
+          <div class="my-3">
+            <div class="chat-user">
+               <%= attachment_image_tag m.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40"%>
+               <%= m.user.name %>
+            </div>
+            <div class="chat-content">
+              <% if m.user == current_user %>
+                <div class="border px-1 py-1", style="border-radius: 7px; background-color: #FECFA4;">
+                  <%= m.content %>
+                </div>
+              <% else %>
+                <div class="border px-1 py-1", style="border-radius: 7px;">
+                  <%= m.content %>
+                </div>
+              <% end %>
+              <%= m.created_at.strftime("%Y-%m-%d %H:%M") %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <!--DM投稿-->
+    <div class="posts">
+      <%= form_for  @message do |f| %>
+        <%= f.text_field :content, placeholder: "Input messages", class: "form-text-field w-100" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "投稿", class: 'form_submit btn btn-success my-2' %>
+      <% end %>
+    </div>
+  </div>
+</div>

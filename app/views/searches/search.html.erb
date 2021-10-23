@@ -1,0 +1,16 @@
+<div class="container">
+  <% unless @value == "" %>
+    <h2><%= @value %>を含む検索結果</h2>
+    <% if @category == 'User' %>
+      <%= render 'users/index', users: @users %>
+    <% elsif @category == 'Group' %>
+      <%= render 'groups/index', groups: @groups %>
+    <% else %>
+      <%= render 'phrases/index', phrases: @phrases %>
+    <% end %>
+  <% else %>
+    <div>
+      <h2>検索ワードを入力してください。</h2>
+    </div>
+  <% end %>
+</div>
