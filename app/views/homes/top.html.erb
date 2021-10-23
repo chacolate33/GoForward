@@ -6,14 +6,22 @@
   </div>
 
    <div class="container select">
-     <% if user_signed_in? %>
-        <div><%= link_to groups_path, class:'link' do %><p>Group <i class="fas fa-users"></i></p><% end %></div>
-        <div><%= link_to myphrase_path, class:"link" do %><p>Bookmark <i class="fas fa-star"></i></p><% end %></div>
-        <div><%= link_to user_path(current_user.id), class:"link" do %><p>MyPage <i class="fas fa-user"></i></p><% end %></div>
-        <div><%= link_to destroy_user_session_path, method: :delete, class:"link" do %><p>Logout <i class="fas fa-sign-out-alt"></i></p><% end %></div>
-   　 <% else %>
-        <div><%= link_to new_user_registration_path, class:"link" do %><p>Signup <i class="fas fa-user-plus"></i></p><% end %></div>
-        <div><%= link_to new_user_session_path, class:"link" do %><p>Login <i class="fas fa-sign-in-alt"></i></p><% end %></div>
-    <% end %>
+     <table>
+       <tbody>
+         <% if user_signed_in? %>
+           <tr>
+            <td><div><%= link_to groups_path, class:'link' do %><p>Group <i class="fas fa-users"></i></p><% end %></div></td>
+            <td><div><%= link_to myphrase_path, class:"link" do %><p>Bookmark <i class="fas fa-star"></i></p><% end %></div></td>
+            <td><div><%= link_to user_path(current_user.id), class:"link" do %><p>MyPage <i class="fas fa-user"></i></p><% end %></div></td>
+            <td><div><%= link_to destroy_user_session_path, method: :delete, class:"link" do %><p>Logout <i class="fas fa-sign-out-alt"></i></p><% end %></div></td>
+           </tr>
+       　 <% else %>
+          <tr>
+            <td><div><%= link_to new_user_registration_path, class:"link" do %><p>Signup <i class="fas fa-user-plus"></i></p><% end %></div></td>
+            <td><div><%= link_to new_user_session_path, class:"link" do %><p>Login <i class="fas fa-sign-in-alt"></i></p><% end %></div></td>
+          </tr>
+        <% end %>
+       </tbody>
+     </table>
    </div>
 </div>
