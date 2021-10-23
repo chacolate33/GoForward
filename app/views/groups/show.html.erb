@@ -1,15 +1,16 @@
-<div class="container">
+<div class="container my-3">
   <h2>Group detail</h2>
   <!--グループの情報-->
   <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
-  <table>
+  
+  <table class="my-3">
     <tbody>
       <tr>
-        <th>Group Name</th>
+        <th>Name</th>
         <td><%= @group.name %></td>
       </tr>
       <tr>
-        <th>Intro</th>
+        <th>Introduction</th>
         <td><%= @group.introduction %></td>
       </tr>
       <tr>
@@ -33,17 +34,17 @@
     <% else %>
       <!--以下承認機能のために付け足したコード-->
       <% if @apply %>
-        <%= link_to '申請取消', group_apply_path(@group, @apply), method: :delete, class: 'btn btn-danger text-line-none' %>
+        <%= link_to 'Cancel', group_apply_path(@group, @apply), method: :delete, class: 'btn btn-danger text-line-none' %>
       <% else %>
-        <%= link_to '加入申請', group_applies_path(@group), method: :post, class: 'btn btn-success text-line-none' %>
+        <%= link_to 'Apply', group_applies_path(@group), method: :post, class: 'btn btn-success text-line-none' %>
       <% end %>
     <% end %>
+  <% else %>
+    <%= link_to "Waiting User", group_applies_path(@group), class: 'btn btn-primary' %>
+    <%= link_to "Edit", edit_group_path(@group.id), class: 'btn btn-primary' %>
   <% end %>
-  
-  <% if @group.leader_id == current_user.id %>
-    <%= link_to "承認待ち一覧", group_applies_path(@group), class: 'btn btn-primary' %>
-  <% end %>
-  
-  <h2>Member</h2>
-  <%= render 'users/index', users: @users %>
+  <div class="my-3">
+    <h2>Member</h2>
+    <%= render 'users/index', users: @users %>
+  </div>
 </div>

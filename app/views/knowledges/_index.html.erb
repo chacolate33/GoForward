@@ -1,16 +1,18 @@
-  <% knowledges.each do |knowledge| %>
-    <div>
-      <%= knowledge.content %>
-      <br>
+<% knowledges.each do |knowledge| %>
+  <div class="container border py-2 pl-4 my-3">
+    <%= knowledge.content %>
+    <div class="border-top">
       <%= knowledge.status %>
-      <p>コメント<%= knowledge.comments.count %>件</p>
+      <span> コメント<%= knowledge.comments.count %>件</span>
       <!--いいねボタン・数表示-->
       <%= render 'favorites/button', knowledge: knowledge %>
       
-      <%= link_to "details", group_phrase_knowledge_path(phrase_id: knowledge.phrase.id, id: knowledge.id) %>
+      <%= link_to "Details", group_phrase_knowledge_path(phrase_id: knowledge.phrase.id, id: knowledge.id) %>
+      <br>
       <% if knowledge.user_id == current_user.id %>
-        <%= link_to "edit", edit_group_phrase_knowledge_path(phrase_id: knowledge.phrase_id, id: knowledge.id), class: 'btn btn-success' %>
-        <%= link_to "delete", group_phrase_knowledge_path(phrase_id: knowledge.phrase_id, id: knowledge.id), method: :delete, class: 'btn btn-danger' %>
+        <%= link_to "Edit", edit_group_phrase_knowledge_path(phrase_id: knowledge.phrase_id, id: knowledge.id), class: 'btn btn-success' %>
+        <%= link_to "Delete", group_phrase_knowledge_path(phrase_id: knowledge.phrase_id, id: knowledge.id), method: :delete, class: 'btn btn-danger' %>
       <% end %>
     </div>
-  <% end %>
+  </div>
+<% end %>

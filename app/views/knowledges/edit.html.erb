@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>周辺知識編集</h2>
+<div class="container my-3">
+  <h2>Knowledge Edit</h2>
   <%= form_with url: group_phrase_knowledge_path(id: @knowledge.id), method: :patch, local:true do |f| %>
     <%= render 'layouts/errors', model: @knowledge%>
     <div class="form-group">
@@ -7,7 +7,7 @@
       <%= f.text_area :content, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <p>どんな知識？</p>
+      <p>Genre</p>
       <%= f.select :status, Knowledge.statuses.keys.to_a %>
     </div>
     <div class="form-group">

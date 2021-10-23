@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container my-3">
   <% if @user == current_user %>
     <h2>Your Page</h2>
   <% else %>
@@ -6,64 +6,65 @@
   <% end %>
   <!--ユーザーの情報-->
   <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
-   <table>
+   <table class="my-3">
     <tbody>
       <tr>
         <th>User Name</th>
         <td><%= @user.name %></td>
       </tr>
       <tr>
-        <th>Intro</th>
+        <th>Introduction</th>
         <td><%= @user.introduction %></td>
       </tr>
       <tr>
-        <td>follows</td>
+        <th>Follows</th>
         <td><%= link_to user_followings_path(@user.id) do %><%= @user.followings.count %><% end %></td>
       </tr>
       <tr>
-        <td>followers</td>
+        <th>Followers</th>
         <td><%= link_to user_followers_path(@user.id) do %><%= @user.followers.count %><% end %></td>
       </tr>
-
-      <tr>
-         <% if @user != current_user %>
-         <!--フォロー登録のボタン-->
-           <% if current_user.following?(@user) %>
-             <td>
-               <%= link_to "Unfolow", user_relationships_path(@user.id), method: :delete, class: 'btn btn-danger' %>
-             </td>
-           <% else %>
-             <td>
-               <%= link_to "Follow", user_relationships_path(@user.id), method: :post, class: 'btn btn-primary'%>
-             </td>
-           <% end %>
-        　<!--DMのためのボタン-->
-           <% if (current_user.following?(@user)) && (@user.following?(current_user)) %>
-             <% if @isRoom == true %>
-               <td><a href="/rooms/<%= @roomId %>" class="btn btn-primary">Chat</a></td>
-             <% else %>
-               <%= form_for @room do |f| %>
-                 <%= f.hidden_field :user_id, value: @user.id %>
-                 <%= fields_for @entry do |e| %>
-                   <%= e.hidden_field :user_id, value: @user.id %>
-                 <% end %>
-                <td><%= f.submit "Chat", class: 'btn btn-primary user-show-chat'%></td>
-               <% end %>
-             <% end %>
-           <% end %>
-
-         <% end %>
-       </tr>
-
     </tbody>
   </table>
+  <div class="my-3">
+     <% if @user != current_user %>
+     <!--フォロー登録のボタン-->
+       <% if current_user.following?(@user) %>
+         <td>
+           <%= link_to "Unfolow", user_relationships_path(@user.id), method: :delete, class: 'btn btn-danger' %>
+         </td>
+       <% else %>
+         <td>
+           <%= link_to "Follow", user_relationships_path(@user.id), method: :post, class: 'btn btn-primary'%>
+         </td>
+       <% end %>
+    　<!--DMのためのボタン-->
+       <% if (current_user.following?(@user)) && (@user.following?(current_user)) %>
+         <% if @isRoom == true %>
+           <td><a href="/rooms/<%= @roomId %>" class="btn btn-primary">Chat</a></td>
+         <% else %>
+           <%= form_for @room do |f| %>
+             <%= f.hidden_field :user_id, value: @user.id %>
+             <%= fields_for @entry do |e| %>
+               <%= e.hidden_field :user_id, value: @user.id %>
+             <% end %>
+            <td><%= f.submit "Chat", class: 'btn btn-primary user-show-chat'%></td>
+           <% end %>
+         <% end %>
+       <% end %>
+     <% end %>
+  </div>
+  <div class="my-3">
+    <% if @user == current_user %>
+      <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
+      <%= link_to "グループを作成する", new_group_path, class: "btn btn-success" %>
+    <% end %>
+  </div>
 
   <% if @user == current_user %>
-    <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
+    <h2>Your Group</h2>
+  <% else %>
+    <h2><%= @user.name =%>'s Group</h2>
   <% end %>
-  <br>
-  <%= link_to "グループを作成する", new_group_path, class: "btn btn-success" %>
-
-  <h2>所属グループ一覧</h2>
   <%= render 'groups/index', groups: @groups %>
 </div>

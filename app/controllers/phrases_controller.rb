@@ -1,7 +1,7 @@
 class PhrasesController < ApplicationController
   def show
     @phrase = Phrase.find(params[:id])
-    @knowledges = Knowledge.where(phrase_id: @phrase.id)
+    @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
     @knowledge = Knowledge.new
   end
 

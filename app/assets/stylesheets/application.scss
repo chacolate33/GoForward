@@ -14,4 +14,20 @@
  *= require_self
  */
 
+// header
+
+.search_submit {
+  border-radius: 5px;
+  background-color: #554c46;
+  color: #ffffff;
+}
+
+table td{
+  padding: 0 10px 0 10px;
+}
+
+table th {
+  text-align: center;
+}
+
 @import "bootstrap";

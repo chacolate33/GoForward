@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>フレーズ編集</h2>
+<div class="container my-3">
+  <h2>Phrase Edit</h2>
   <%= form_with url: group_phrase_path(id: @phrase.id), method: :patch, local:true do |f| %>
     <%= render 'layouts/errors', model: @phrase %>
     <div class="form-group">

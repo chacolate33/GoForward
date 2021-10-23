@@ -4,6 +4,6 @@
         <% end %>
       <% else %>
         <%= link_to group_phrase_knowledge_favorites_path(phrase_id: knowledge.phrase_id, knowledge_id: knowledge.id), method: :post do %>
-          <i class="far fa-heart"></i><%= knowledge.favorites.count %>
+          <i class="far fa-heart text-danger"><%= knowledge.favorites.count %></i>
         <% end %>
       <% end %>

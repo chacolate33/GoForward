@@ -15,4 +15,6 @@ class Group < ApplicationRecord
   def self.search_for(value)
     Group.where('name LIKE ?', '%' + value + '%')
   end
+
+
 end

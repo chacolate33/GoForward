@@ -1,20 +1,18 @@
-<div class="container">
+<div class="container my-3">
   <h2>Follow Users</h2>
   <% if @users.exists? %>
     <table>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.name %></td>
-            <td>フォロー数: <%= user.followings.count %></td>
-            <td>フォロワー数: <%= user.followers.count %></td>
+            <td>
+              <%= link_to user_path(user) do %>
+                <%= attachment_image_tag user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40"%>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td>Follows: <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %></td>
+            <td>Followers: <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %></td>
           </tr>
         <% end %>
       </tbody>
