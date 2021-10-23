@@ -1,4 +1,12 @@
-<table>
+<table class="my-3">
+  <thead>
+      <tr>
+        <th>Name</th>
+        <th>Introduction</th>
+        <th>Details</th>
+      </tr>
+  </thead>
+
   <tbody>
     <% groups.each do |group| %>
       <tr>
@@ -8,23 +16,17 @@
             <%= group.name %>
           <% end %>
         </td>
-
         <td>
-          <% if group.password %>
-            <p>パスワードあり</p>
-          <% else %>
-            <p>パスワードなし</p>
-          <% end %>
+          <%= group.introduction.truncate(20) %>
         </td>
-        
         <td>
           <%= link_to admin_group_path(group.id) do %>
-          <span>詳しく見る</span>
+          <span>Details</span>
           <% end %>
         </td>
 
         <td>
-          <%= link_to "削除する", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
+          <%= link_to "Delete", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
