@@ -17,11 +17,11 @@
           </td>
           
           <td>
-            follows
+            Follows
             <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %>
           </td>
           <td>
-            followers
+            Followers
             <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %>
           </td>
           

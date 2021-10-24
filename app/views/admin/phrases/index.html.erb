@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container my-3">
     <div>
-      <h2><%= @group.name %>のフレーズ一覧</h2>
-      
-      <%= render 'index', phrases: @phrases %>
+      <h2><%= @group.name %>'s Phrases</h2>
+      <div class="my-3">
+        <%= render 'index', phrases: @phrases %>
+      </div>
       
     </div>
 </div>

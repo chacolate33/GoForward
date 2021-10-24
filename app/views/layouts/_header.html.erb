@@ -9,7 +9,7 @@
           <% if user_signed_in? %>
               <%= form_with url: search_path, method: :get, local: true do |f| %>
                 <i class="fas fa-search text-dark"></i>
-                <%= f.text_field :value, placeholder: "Enter a keyword" %>
+                <%= f.text_field :value, placeholder: "Enter a keyword", class: 'p-1' %>
                 <%= f.submit "search", class: "search_submit" %>
                 <%= f.select :category, options_for_select({"User" => "User", "Group" => "Group", "Phrase" => "Phrase"}) %>
               <% end %>
@@ -19,7 +19,7 @@
           <% if admin_signed_in? %>
               <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
                 <i class="fas fa-search text-dark"></i>
-                <%= f.text_field :value, placeholder: "Enter a keyword" %>
+                <%= f.text_field :value, placeholder: "Enter a keyword", class: 'p-1' %>
                 <%= f.submit "search", class: "search_submit" %>
                 <%= f.select :category, options_for_select({"User" => "User", "Group" => "Group", "Phrase" => "Phrase"}) %>
               <% end %>
