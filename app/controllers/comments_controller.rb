@@ -7,23 +7,26 @@ class CommentsController < ApplicationController
     @comment.knowledge_id = @knowledge.id
     if @comment.save
       flash[:notice] = "You have created comment successfully."
-      redirect_to request.referer
+      @comments = Comment.where(knowledge_id: @knowledge.id)
+      # redirect_to request.referer
     else
       @knowledge = Knowledge.find(params[:knowledge_id])
       @phrase = Phrase.find_by(id: @knowledge.phrase_id)
       @comments = Comment.where(knowledge_id: @knowledge.id)
-      render 'knowledges/show'
+      # render 'knowledges/show'
     end
   end
-  
+
   def destroy
+    @knowledge = Knowledge.find(params[:knowledge_id])
+    @comments = Comment.where(knowledge_id: @knowledge.id)
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to request.referer
+    # redirect_to request.referer
   end
-  
+
   private
   def comment_params
-    params.permit(:content)    
+    params.permit(:content)
   end
 end
