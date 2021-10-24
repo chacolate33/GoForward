@@ -23,11 +23,11 @@
   <!--知識-->
   <div class="container border post py-2 pl-4 my-3">
     <%= @knowledge.content %>
-    <div class="border-top">
+    <div class="border-top" id="knowledge_<%= @knowledge.id %>">
       <%= @knowledge.status %>
       <span> コメント<%= @knowledge.comments.count %>件</span>
       <!--いいねボタン・数表示-->
-      <%= render 'favorites/button', knowledge: @knowledge %>
+      <span class="favorite-btn"><%= render 'favorites/button', knowledge: @knowledge %></span>
 
       <br>
       <% if @knowledge.user_id == current_user.id %>
