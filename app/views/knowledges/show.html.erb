@@ -1,25 +1,27 @@
 <div class="container my-3">
-  <div>
+  <!--投稿者-->
+  <div class="my-3">
     <%= link_to user_path(@phrase.user) do %>
       <%= attachment_image_tag @phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60" %>
       <%= @phrase.user.name %>
     <% end %>
-
-    <div class="container">
-      <div class="row">
-        <!--ブックマーク-->
-        <div class="col-1">
-          <%= render 'bookmarks/button', phrase: @phrase %>
-        </div>
-        <div class="col-11">
-        <!--英語と訳-->
-          <h3><%= @phrase.content %></h3>
-          <h3><%= @phrase.japanese %></h3>
-        </div>
+  </div>
+  <!--フレーズ-->
+  <div class="container border post py-3">
+    <div class="row">
+      <!--ブックマーク-->
+      <div class="col-1">
+        <%= render 'bookmarks/button', phrase: @phrase %>
+      </div>
+      <div class="col-11">
+      <!--英語と訳-->
+        <h3><%= @phrase.content %></h3>
+        <h3><%= @phrase.japanese %></h3>
       </div>
     </div>
   </div>
-  <div class="container border py-2 pl-4 my-3">
+  <!--知識-->
+  <div class="container border post py-2 pl-4 my-3">
     <%= @knowledge.content %>
     <div class="border-top">
       <%= @knowledge.status %>
@@ -49,14 +51,14 @@
     <% end %>
 
     <% @comments.each do |comment| %>
-      <div class="border my-2 p-2">
+      <div class="border post my-2 py-2 pl-4">
         <%= link_to user_path(comment.user.id) do %>
           <%= attachment_image_tag comment.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
           <%= comment.user.name %>
         <% end %>
         <br>
         <%= comment.content %>
-    
+        <br>
         <% if comment.user == current_user %>
           <%= link_to "delete", group_phrase_knowledge_comment_path(knowledge_id: comment.knowledge_id, id: comment.id), method: :delete, class:'btn btn-danger' %>
         <% end %>
