@@ -2,6 +2,17 @@
     <div>
       <h2><%= @group.name %>'s Phrases</h2>
       <div class="my-3">
+         <% if @phrases.present? %>
+          <%= link_to "英語のABC順に並び替え", admin_group_phrases_path(sort_abc: "true") %>
+          <br>
+          <%= link_to "和訳の五十音順に並び替え", admin_group_phrases_path(sort_aiu: "true") %>
+          <br>
+          <%= link_to "知識投稿の多い順に並び替え", admin_group_phrases_path(sort_knowledge: "true") %>
+          <br>
+          <%= link_to "新しい順に並び替え", admin_group_phrases_path(sort_new: "true") %>
+        <% else %>
+          <p>フレーズを投稿しましょう。</p>
+        <% end %>
         <%= render 'index', phrases: @phrases %>
       </div>
 
