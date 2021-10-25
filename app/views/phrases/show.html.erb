@@ -28,13 +28,14 @@
       </div>
 
       <h4 class="my-3">Knowledges</h4>
-      <% unless @knowledges %>
-        <p>知識を投稿しましょう</p>
-      <% else %>
+      <% if @knowledges.present? %>
+      <h5>並び替え</h5>
         <!--並び替えボタン-->
-        <%= link_to 'いいねの数で並び替え', group_phrase_path(sort_favorite: "true") %>
+        <%= link_to 'いいねの多い順', group_phrase_path(id: @phrase.id, sort_favorite: "true") %>
         <br>
-        <%= link_to 'ステータスごとに並び替え', group_phrase_path(sort_status: "true") %>
+        <%= link_to 'ステータスごと', group_phrase_path(id: @phrase.id, sort_status: "true") %>
+      <% else %>
+        <p>知識を投稿しましょう</p>
       <% end %>
       <%= render "knowledges/index", knowledges: @knowledges %>
     </div>
