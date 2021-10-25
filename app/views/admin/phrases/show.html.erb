@@ -17,9 +17,10 @@
 
   <h4 class="my-3">Knowledges</h4>
   <% if @knowledges.present? %>
-    <%= link_to 'いいねの数で並び替え', admin_group_phrase_path(sort_favorite: "true") %>
+  <h5>並び替え</h5>
+    <%= link_to 'いいねの多い順', admin_group_phrase_path(sort_favorite: "true") %>
     <br>
-    <%= link_to 'ステータスごとに並び替え', admin_group_phrase_path(sort_status: "true") %>
+    <%= link_to 'ステータスごと', admin_group_phrase_path(sort_status: "true") %>
   <% else %>
     <p>知識投稿はありません。</p>
   <% end %>

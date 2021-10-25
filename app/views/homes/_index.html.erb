@@ -1,23 +1,34 @@
  <% bookmarks.each do |bookmark| %>
     <div class="container border post py-2 pl-4 my-3">
-      <div class="row">
-        <div class="col-1">
-          <% if bookmark.phrase.bookmarked_by?(current_user) %>
-            <%= link_to group_phrase_bookmarks_path(group_id: bookmark.phrase.group.id, phrase_id: bookmark.phrase.id), method: :delete do %>
-              <i class="fas fa-star text-warning"></i>
+      <div class="container">
+        <div class="row">
+          <div class="col-1">
+          <!--ブックマーク-->
+            <% if bookmark.phrase.bookmarked_by?(current_user) %>
+              <%= link_to group_phrase_bookmarks_path(group_id: bookmark.phrase.group.id, phrase_id: bookmark.phrase.id), method: :delete do %>
+                <i class="fas fa-star text-warning"></i>
+              <% end %>
+          　<% else %>
+              <%= link_to group_phrase_bookmarks_path(group_id: bookmark.phrase.group.id, phrase_id: bookmark.phrase.id), method: :post do %>
+                <i class="far fa-star text-warning"></i>
+              <% end %>
             <% end %>
-        　<% else %>
-            <%= link_to group_phrase_bookmarks_path(group_id: bookmark.phrase.group.id, phrase_id: bookmark.phrase.id), method: :post do %>
-              <i class="far fa-star text-warning"></i>
+          </div>
+          <div class="col-11">
+          <!--英語と訳-->
+            <%= link_to group_phrase_path(group_id: bookmark.phrase.group_id, id: bookmark.phrase_id) do %>
+              <h3 style="color: #212529;"><%= bookmark.phrase.content %></h3>
+              <h3 style="color: #212529;"><%= bookmark.phrase.japanese %></h3>
             <% end %>
-          <% end %>
+          </div>
         </div>
-        <div class="col-11">
-          <%= link_to group_phrase_path(group_id: bookmark.phrase.group_id, id: bookmark.phrase_id) do %>
-            <h3 style="color: #212529;"><%= bookmark.phrase.content %></h3>
-            <h3 style="color: #212529"><%= bookmark.phrase.japanese %></h3>
-          <% end %>
-        </div>
+      </div>
+      <div>
+        <span>知識<%= bookmark.phrase.knowledges.count %>件</span>
+        <% if bookmark.phrase.user_id == current_user.id %>
+          <%= link_to "Edit", edit_group_phrase_path(group_id: bookmark.phrase.group_id, id: bookmark.phrase.id), class: 'btn btn-success' %>
+          <%= link_to "Delete", group_phrase_path(group_id: bookmark.phrase.group_id, id: bookmark.phrase.id), method: :delete, class: 'btn btn-danger' %>
+        <% end %>
       </div>
     </div>
   <% end %>

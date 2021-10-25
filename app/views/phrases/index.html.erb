@@ -4,13 +4,14 @@
       <h2><%= @group.name %>'s Phrases</h2>
       <div class="my-3">
         <% if @phrases.present? %>
-          <%= link_to "英語のABC順に並び替え", group_phrases_path(sort_abc: "true") %>
+          <h5>並び替え</h5>
+          <%= link_to "英語のABC順", group_phrases_path(sort_abc: "true") %>
           <br>
-          <%= link_to "和訳の五十音順に並び替え", group_phrases_path(sort_aiu: "true") %>
+          <%= link_to "和訳の五十音順", group_phrases_path(sort_aiu: "true") %>
           <br>
-          <%= link_to "知識投稿の多い順に並び替え", group_phrases_path(sort_knowledge: "true") %>
+          <%= link_to "知識投稿の多い順", group_phrases_path(sort_knowledge: "true") %>
           <br>
-          <%= link_to "新しい順に並び替え", group_phrases_path(sort_new: "true") %>
+          <%= link_to "新しい順", group_phrases_path(sort_new: "true") %>
         <% else %>
           <p>フレーズを投稿しましょう。</p>
         <% end %>
