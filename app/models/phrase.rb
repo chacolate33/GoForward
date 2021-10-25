@@ -4,6 +4,7 @@ class Phrase < ApplicationRecord
   belongs_to :group
   has_many :bookmarks, dependent: :destroy
   has_many :knowledges, dependent: :destroy
+  has_many :posted_phrases, through: :knowledges, source: :user
   
   # バリデーション
   validates :content, presence: true

@@ -4,7 +4,7 @@
     <div>
       <% if e.user != current_user %>
         <h3>
-          Chat with 
+          Chat with
           <%= link_to user_path(e.user) do %>
             <%= e.user.name %>
           <% end %>
@@ -12,7 +12,7 @@
       <% end %>
     </div>
   <% end %>
-  
+
   <div class="chats">
     <!--DM内容-->
     <div class="chat">
@@ -41,7 +41,8 @@
     </div>
     <!--DM投稿-->
     <div class="posts">
-      <%= form_for  @message do |f| %>
+      <%= form_with model:@message, local:true do |f| %>
+        <%= render 'layouts/errors', model: f.object %>
         <%= f.text_field :content, placeholder: "Input messages", class: "form-text-field w-100" %>
         <%= f.hidden_field :room_id, value: @room.id %>
         <%= f.submit "投稿", class: 'form_submit btn btn-success my-2' %>

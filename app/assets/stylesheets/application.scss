@@ -13,21 +13,54 @@
  *= require_tree .
  *= require_self
  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+background-color: #f5efe9 !important;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
 // header
+// header {
+//   height: 92px;
+// }
 
 .search_submit {
   border-radius: 5px;
   background-color: #554c46;
-  color: #ffffff;
+  color: #fff;
 }
 
+// devise
+// .label {
+//   display: inline-block;
+//   text-align: left;
+//   width: 150px;
+// }
+
+// table
+
+table  {
+  // border-collapse: separate !important;
+  // border-spacing: 10px;
+}
 table td{
-  padding: 0 10px 0 10px;
+  padding: 3px 10px 3px 10px;
 }
 
 table th {
   text-align: center;
+}
+
+// 投稿
+.post {
+  background-color: #fff !important;
 }
 
 @import "bootstrap";

@@ -1,18 +1,28 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h2>フレーズ詳細</h2>
-      <%= link_to admin_user_path(@phrase.user) do %>
-        <%= attachment_image_tag @phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40" %>
-        <%= @phrase.user.name %>
-      <% end %>
-      <br>
-      <%= @phrase.content %>  
-      <%= @phrase.japanese %>  
-      <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
-    
-      <h3>周辺知識一覧</h3>
-      <%= render "admin/knowledges/index", knowledges: @knowledges %>
-    </div>
+<div class="container my-3">
+  <!--投稿者-->
+  <div class="my-3">
+    <%= link_to admin_user_path(@phrase.user) do %>
+      <%= attachment_image_tag @phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60" %>
+      <%= @phrase.user.name %>
+    <% end %>
   </div>
+  <!--フレーズ内容-->
+  <div class="container post py-3 pl-4">
+    <div>
+      <h3><%= @phrase.content %></h3>
+      <h3><%= @phrase.japanese %></h3>
+    </div>
+    <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
+  </div>
+
+  <h4 class="my-3">Knowledges</h4>
+  <% if @knowledges.present? %>
+  <h5>並び替え</h5>
+    <%= link_to 'いいねの多い順', admin_group_phrase_path(sort_favorite: "true") %>
+    <br>
+    <%= link_to 'ステータスごと', admin_group_phrase_path(sort_status: "true") %>
+  <% else %>
+    <p>知識投稿はありません。</p>
+  <% end %>
+  <%= render "admin/knowledges/index", knowledges: @knowledges %>
 </div>

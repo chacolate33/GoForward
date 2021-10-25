@@ -1,12 +1,12 @@
 <% knowledges.each do |knowledge| %>
-  <div class="container border py-2 pl-4 my-3">
+  <div class="container border post py-2 pl-4 my-3">
     <%= knowledge.content %>
-    <div class="border-top">
+    <div class="border-top" id="knowledge_<%= knowledge.id %>">
       <%= knowledge.status %>
       <span> コメント<%= knowledge.comments.count %>件</span>
       <!--いいねボタン・数表示-->
-      <%= render 'favorites/button', knowledge: knowledge %>
-      
+      <span class="favorite-btn"><%= render 'favorites/button', knowledge: knowledge %></span>
+
       <%= link_to "Details", group_phrase_knowledge_path(phrase_id: knowledge.phrase.id, id: knowledge.id) %>
       <br>
       <% if knowledge.user_id == current_user.id %>

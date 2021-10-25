@@ -1,11 +1,15 @@
 <div class="container my-3">
   <div class="row">
     <div class="col-8">
-      <%= link_to user_path(@phrase.user) do %>
-        <%= attachment_image_tag @phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60" %>
-        <%= @phrase.user.name %>
-      <% end %>
-      <div class="container">
+      <!--投稿者-->
+      <div class="my-3">
+        <%= link_to user_path(@phrase.user) do %>
+          <%= attachment_image_tag @phrase.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60" %>
+          <%= @phrase.user.name %>
+        <% end %>
+      </div>
+      <!--フレーズ内容-->
+      <div class="container border post py-3">
         <div class="row">
           <!--ブックマーク-->
           <div class="col-1">
@@ -16,15 +20,21 @@
             <h3><%= @phrase.japanese %></h3>
           </div>
         </div>
+
+        <% if @phrase.user_id == current_user.id %>
+          <%= link_to "edit", edit_group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), class: 'btn btn-success' %>
+          <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
+        <% end %>
       </div>
 
-      <% if @phrase.user_id == current_user.id %>
-        <%= link_to "edit", edit_group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), class: 'btn btn-success' %>
-        <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
-      <% end %>
-
       <h4 class="my-3">Knowledges</h4>
-      <% unless @knowledges.exists? %>
+      <% if @knowledges.present? %>
+      <h5>並び替え</h5>
+        <!--並び替えボタン-->
+        <%= link_to 'いいねの多い順', group_phrase_path(id: @phrase.id, sort_favorite: "true") %>
+        <br>
+        <%= link_to 'ステータスごと', group_phrase_path(id: @phrase.id, sort_status: "true") %>
+      <% else %>
         <p>知識を投稿しましょう</p>
       <% end %>
       <%= render "knowledges/index", knowledges: @knowledges %>

@@ -1,8 +1,21 @@
-<div class="container">
+<div class="container my-3">
     <div>
-      <h2><%= @group.name %>のフレーズ一覧</h2>
-      
-      <%= render 'index', phrases: @phrases %>
-      
+      <h2><%= @group.name %>'s Phrases</h2>
+      <div class="my-3">
+        <% if @phrases.present? %>
+          <h5>並び替え</h5>
+          <%= link_to "英語のABC順", admin_group_phrases_path(sort_abc: "true") %>
+          <br>
+          <%= link_to "和訳の五十音順", admin_group_phrases_path(sort_aiu: "true") %>
+          <br>
+          <%= link_to "知識投稿の多い順", admin_group_phrases_path(sort_knowledge: "true") %>
+          <br>
+          <%= link_to "新しい順", admin_group_phrases_path(sort_new: "true") %>
+        <% else %>
+          <p>フレーズはありません。</p>
+        <% end %>
+        <%= render 'index', phrases: @phrases %>
+      </div>
+
     </div>
 </div>
