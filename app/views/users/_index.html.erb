@@ -1,9 +1,13 @@
- <table class="table-hover">
+<div class="table-responsive">
+  <table class="table-hover text-nowrap">
     <thead>
       <tr>
         <th>Name</th>
         <th>Follows</th>
-        <th>Follow</th>
+        <th>Followers</th>
+        <th>Follow/Unfollow</th>
+        <th>Status</th>
+        <th>Introduction</th>
       </tr>
     </thead>
     <tbody>
@@ -15,22 +19,13 @@
               <%= user.name %>
             <% end %>
           </td>
-
+      
           <td>
-            Follows
-            <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %>
+            Follows: <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %>
           </td>
           <td>
-            Followers
-            <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %>
+            Followers: <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %>
           </td>
-
-          <% if user.is_deleted == true %>
-            <td>
-              <p>退会中</p>
-            </td>
-          <% end %>
-
           <td>
             <% if user != current_user %>
               <% if current_user.following?(user) %>
@@ -40,8 +35,17 @@
               <% end %>
             <% end %>
           </td>
-
+          <td>
+            <% if user.is_deleted == false %>
+              <p class="fas fa-user-check text-success">有効</p>
+            <% else %>
+              <p class="fas fa-user-check text-danger">退会</p>
+            <% end %> 
+          </td>
+          <td><%= user.introduction.truncate(30) %></td>
+      
         <tr>
       <% end %>
     </tbody>
   </table>
+</div>
