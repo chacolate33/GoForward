@@ -1,0 +1,8 @@
+<div class="container my-3">
+  <h2>Follower Users</h2>
+  <% if @users.exists? %>
+    <%= render 'admin/users/index', users: @users %>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+</div>
