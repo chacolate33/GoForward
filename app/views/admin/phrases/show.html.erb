@@ -14,10 +14,14 @@
     </div>
     <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
   </div>
-  
+
   <h4 class="my-3">Knowledges</h4>
-  <% unless @knowledges.exists? %>
+  <% unless @knowledges %>
     <p>知識投稿はありません。</p>
+  <% else %>
+    <%= link_to 'いいねの数で並び替え', admin_group_phrase_path(sort_favorite: "true") %>
+    <br>
+    <%= link_to 'ステータスごとに並び替え', admin_group_phrase_path(sort_status: "true") %>
   <% end %>
   <%= render "admin/knowledges/index", knowledges: @knowledges %>
 </div>
