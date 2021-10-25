@@ -2,7 +2,7 @@
     <div>
       <h2><%= @group.name %>'s Phrases</h2>
       <div class="my-3">
-         <% if @phrases.present? %>
+        <% if @phrases.present? %>
           <h5>並び替え</h5>
           <%= link_to "英語のABC順", admin_group_phrases_path(sort_abc: "true") %>
           <br>

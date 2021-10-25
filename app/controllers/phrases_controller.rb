@@ -2,7 +2,8 @@ class PhrasesController < ApplicationController
   def index
     @group = Group.find(params[:group_id])
     @phrase = Phrase.new
-     if params[:sort_abc]
+    # 並び替え機能
+    if params[:sort_abc]
       @phrases = Phrase.where(group_id: @group.id).order(content: "ASC")
     elsif params[:sort_aiu]
       @phrases = Phrase.where(group_id: @group.id).order(japanese: "ASC")
