@@ -42,6 +42,8 @@ class PhrasesController < ApplicationController
 
   def edit
     @phrase = Phrase.find(params[:id])
+    @content = @phrase.content
+    @japanese = @phrase.japanese
   end
 
   def update

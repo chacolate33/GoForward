@@ -20,6 +20,9 @@ class KnowledgesController < ApplicationController
 
   def edit
     @knowledge = Knowledge.find(params[:id])
+    @content = @knowledge.content
+    @genre = @knowledge.status
+    
   end
 
   def update

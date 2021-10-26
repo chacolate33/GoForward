@@ -4,11 +4,11 @@
     <%= render 'layouts/errors', model: @knowledge%>
     <div class="form-group">
       <%= f.label :content %>
-      <%= f.text_area :content, class: 'form-control' %>
+      <%= f.text_area :content, class: 'form-control', value: @content %>
     </div>
     <div class="form-group">
       <p>Genre</p>
-      <%= f.select :status, Knowledge.statuses.keys.to_a %>
+      <%= f.select :status, Knowledge.statuses.keys.to_a, selected: @genre %>
     </div>
     <div class="form-group">
       <%= f.submit class: 'btn btn-success' %>
