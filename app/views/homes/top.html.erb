@@ -13,8 +13,8 @@
         <div><%= link_to user_path(current_user.id), class:"link" do %><p>My Page <i class="fas fa-user"></i></p><% end %></div>
         <div><%= link_to destroy_user_session_path, method: :delete, class:"link" do %><p>Log out <i class="fas fa-sign-out-alt"></i></p><% end %></div>
       <% else %>
-        <div><%= link_to new_user_registration_path, class:"link" do %><p>Sign up <i class="fas fa-user-plus"></i></p><% end %></div>
-        <div><%= link_to new_user_session_path, class:"link" do %><p>Log in <i class="fas fa-sign-in-alt"></i></p><% end %></div>
+        <div class="new"><%= link_to new_user_registration_path, class:"link" do %><p>Sign up <i class="fas fa-user-plus"></i></p><% end %></div>
+        <div class="new"><%= link_to new_user_session_path, class:"link" do %><p>Log in <i class="fas fa-sign-in-alt"></i></p><% end %></div>
       <% end %>
     </div>
   </div>
