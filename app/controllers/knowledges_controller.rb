@@ -22,7 +22,6 @@ class KnowledgesController < ApplicationController
     @knowledge = Knowledge.find(params[:id])
     @content = @knowledge.content
     @genre = @knowledge.status
-    
   end
 
   def update
