@@ -1,4 +1,6 @@
 class Admin::PhrasesController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @group = Group.find(params[:group_id])
     if params[:sort_abc]

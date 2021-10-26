@@ -1,6 +1,8 @@
 class GroupUsersController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
-    # 引数を取る
+    # グループのidを引数で取る
     @params = params[:group_id]
     @group_user = GroupUser.new
     @group_user.user_id = group_user_params[:user_id]
@@ -13,7 +15,7 @@ class GroupUsersController < ApplicationController
   end
 
   def destroy
-    # 引数を取る
+    # グループのidを引数で取る
     @params = params[:group_id]
     @group_user = GroupUser.find_by(group_id: @params, user_id: current_user.id)
     @group_user.destroy

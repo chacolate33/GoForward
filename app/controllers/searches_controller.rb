@@ -1,4 +1,6 @@
 class SearchesController < ApplicationController
+  before_action :authenticate_user!
+  
   def search
     @value = params['value']
     @category = params['category']

@@ -15,7 +15,7 @@ class RoomsController < ApplicationController
       @message = Message.new
       @entries = @room.entries
     else
-      redirect_back(fallback_location: root_path)
+      redirect_to root_path
     end
   end
 end

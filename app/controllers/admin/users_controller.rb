@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @users = User.all
   end
@@ -22,6 +24,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+  
   def user_params
     params.permit(:is_deleted)
   end

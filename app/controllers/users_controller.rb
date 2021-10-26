@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user, only: [:edit, :update]
+
+  # 他ユーザーの情報を編集できないようにする
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      flash[:notice] = "Not authorized"
+      redirect_to root_path
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     # 以下所属グループ一覧の記述
@@ -41,7 +52,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    
+
   end
 
   def update

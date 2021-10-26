@@ -66,5 +66,9 @@
   <% else %>
     <h2><%= @user.name =%>'s Group</h2>
   <% end %>
-  <%= render 'groups/index', groups: @groups %>
+  <% if @groups.present? %>
+    <%= render 'groups/index', groups: @groups %>
+  <% else %>
+    <p>グループを作成しましょう。</p>
+  <% end %>
 </div>

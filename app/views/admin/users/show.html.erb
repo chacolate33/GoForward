@@ -44,7 +44,11 @@
     </div>
   <% end %>
   <div class="cotainer my-3">
-    <h2><%= @user.name%>'s Group</h2>
-    <%= render 'admin/homes/index', groups: @groups %>
+    <h2><%= @user.name %>'s Group</h2>
+    <% if @groups.present? %>
+      <%= render 'admin/homes/index', groups: @groups %>
+    <% else %>
+      <p>所属グループはありません。</p>
+    <% end %>
   </div>
 </div>
