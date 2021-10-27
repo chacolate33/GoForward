@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     @user = current_user
     @user.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理を実行いたしました"
+    flash[:notice] = "The withdrawral process has been executed."
     redirect_to root_path
   end
 

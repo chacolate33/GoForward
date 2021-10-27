@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    flash[:notice] = "ユーザー情報を編集しました。"
+    flash[:notice] = "You have updated the status successfully."
     redirect_to request.referer
   end
 

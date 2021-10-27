@@ -10,7 +10,7 @@ class GroupUsersController < ApplicationController
     @group_user.save
     apply = Apply.find(group_user_params[:apply_id])
     apply.destroy
-    flash[:notice] = "ユーザーがグループに加入しました。"
+    flash[:notice] = "User has joined the group."
     redirect_to request.referer
   end
 

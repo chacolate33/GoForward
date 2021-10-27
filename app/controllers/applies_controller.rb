@@ -3,14 +3,14 @@ class AppliesController < ApplicationController
   
   def create
     current_user.applies.create(group_id: apply_params[:group_id])
-    flash[:notice] = "加入申請しました。"
+    flash[:notice] = "You applied to join the group."
     redirect_to request.referer
   end
 
   def destroy
     @apply = Apply.find(params[:id])
     @apply.destroy
-    flash[:notice] = "加入申請を取り消しました。"
+    flash[:notice] = "You canceled you application."
     redirect_to request.referer
 
   end

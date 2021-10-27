@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
     @group.users << current_user
     
     if @group.save
-      redirect_to user_path(current_user), notice: 'グループを作成しました'
+      redirect_to user_path(current_user), notice: 'You have made new group.'
     else
       render :new
     end
