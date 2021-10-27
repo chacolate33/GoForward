@@ -5,9 +5,9 @@
         <th>Name</th>
         <th>Follows</th>
         <th>Followers</th>
+        <th>Introduction</th>
         <th>Follow/Unfollow</th>
         <th>Status</th>
-        <th>Introduction</th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +19,6 @@
               <%= user.name %>
             <% end %>
           </td>
-      
           <td>
             Follows: <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %>
           </td>
@@ -27,6 +26,11 @@
             Followers: <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %>
           </td>
           <td>
+            <% if user.introduction.present? %>
+              <%= user.introduction.truncate(30) %>
+            <% end %>
+          </td>
+          <td class="text-center">
             <% if user != current_user %>
               <% if current_user.following?(user) %>
                 <%= link_to "Unfolow", user_relationships_path(user.id), method: :delete, class: 'btn btn-danger' %>
@@ -42,8 +46,7 @@
               <p class="fas fa-user-check text-danger">退会</p>
             <% end %> 
           </td>
-          <td><%= user.introduction %></td>
-        <tr>
+        </tr>
       <% end %>
     </tbody>
   </table>

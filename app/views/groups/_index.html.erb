@@ -18,13 +18,13 @@
                 <%= group.name %>
               <% end %>
             <% else %>
-              <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
-              <%= group.name %>
+                <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+                <%= group.name %>
             <% end %>
-
+      
           </td>
           <td>
-            <%= group.introduction.truncate(20) %>
+            <%= group.introduction.truncate(30) %>
           </td>
           <td>
             <%= link_to group_path(group.id) do %>

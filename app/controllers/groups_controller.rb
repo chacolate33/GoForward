@@ -49,7 +49,9 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @leader = User.find_by(id: @group.leader_id)
-
+    # 承認があればグループリーダーの画面に承認待ち一覧へのボタンを設置
+    @applies = Apply.where(group_id: params[:id])
+    # グループへの加入申請をしていればキャンセルボタンを設置
     @apply = Apply.find_by(group_id: @group.id, user_id: current_user.id)
     # 所属ユーザー一覧表示
     @group_users = GroupUser.where(group_id: @group.id)
