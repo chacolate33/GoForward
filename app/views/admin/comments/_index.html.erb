@@ -1,0 +1,15 @@
+<% comments.each do |comment| %>
+  <div class="border post my-2 py-2 pl-4">
+    <div>
+      <%= link_to user_path(comment.user.id) do %>
+        <%= attachment_image_tag comment.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+        <%= comment.user.name %>
+      <% end %>
+    </div>
+      <%= comment.content %>
+    <br>
+    <%= link_to "delete", group_phrase_knowledge_comment_path(knowledge_id: comment.knowledge_id, id: comment.id), method: :delete, class:'btn btn-danger' %>
+  </div>
+<% end %>
+
+<%= paginate comments %>

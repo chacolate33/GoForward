@@ -2,6 +2,6 @@ class Admin::HomesController < ApplicationController
   before_action :authenticate_admin!
   
   def top
-    @groups = Group.all
+    @groups = Group.all.order(created_at: "DESC").page(params[:page]).per(20)
   end
 end

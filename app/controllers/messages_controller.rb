@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
       @message = Message.create(params.require(:message).permit(:user_id, :content, :room_id).merge(user_id: current_user.id))
       @room = Room.find_by(params[:room_id])
       if @message.save
-        redirect_to "/rooms/#{@room.id}"
+        redirect_to room_path(@room.id)
       else
         @messages = @room.messages
         @entries = @room.entries

@@ -1,8 +1,8 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
-    @users = User.all
+    @users = User.all.order(created_at: "DESC").page(params[:page]).per(20)
   end
 
   def show
@@ -14,6 +14,7 @@ class Admin::UsersController < ApplicationController
       group = Group.find_by(id: group_user.group_id)
       @groups.push(group)
     end
+    @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(20)
   end
 
   def update
@@ -24,7 +25,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-  
+
   def user_params
     params.permit(:is_deleted)
   end
