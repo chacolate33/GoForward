@@ -49,9 +49,10 @@ class PhrasesController < ApplicationController
   end
 
   def destroy
+    @group = Group.find(params[:group_id])
     @phrase = Phrase.find(params[:id])
     @phrase.destroy
-    redirect_to request.referer
+    redirect_to group_phrases_path(group_id: @group.id)
   end
 
   def edit
@@ -81,7 +82,8 @@ class PhrasesController < ApplicationController
       flash[:notice] = "You have created phrase successfullly."
       redirect_to group_phrases_path(@group.id)
     else
-      @phrases = Phrase.where(group_id: @group.id)
+      @phrases = Phrase.where(group_id: @group.id).order(:status)
+      @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
       render :index
     end
   end
