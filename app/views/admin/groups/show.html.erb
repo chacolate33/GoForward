@@ -1,23 +1,25 @@
 <div class="container my-3">
   <h2>Group detail</h2>
   <!--グループの情報-->
-  <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
-  <table class="my-3">
-    <tbody>
-      <tr>
-        <th>Name</th>
-        <td><%= @group.name %></td>
-      </tr>
-      <tr>
-        <th>Introduction</th>
-        <td><%= @group.introduction %></td>
-      </tr>
-      <tr>
-        <th>Leader</th>
-        <td><%= link_to @leader.name, admin_user_path(@leader.id) %></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="text-center">
+    <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
+    <table class="my-3 center">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td><%= @group.name %></td>
+        </tr>
+        <tr>
+          <th>Introduction</th>
+          <td><%= @group.introduction %></td>
+        </tr>
+        <tr>
+          <th>Leader</th>
+          <td><%= link_to @leader.name, admin_user_path(@leader.id) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <!--メンバー一覧-->
   <div class="my-3">
     <h2>Member</h2>

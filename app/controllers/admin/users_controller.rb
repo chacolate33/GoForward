@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @users = User.all
   end
@@ -17,11 +19,12 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    flash[:notice] = "ユーザー情報を編集しました。"
+    flash[:notice] = "You have updated the status successfully."
     redirect_to request.referer
   end
 
   private
+  
   def user_params
     params.permit(:is_deleted)
   end

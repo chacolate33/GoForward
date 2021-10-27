@@ -4,6 +4,7 @@
     <title>GoForward</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     
     <script src="https://kit.fontawesome.com/46b25624aa.js" crossorigin="anonymous"></script>
 
@@ -14,7 +15,9 @@
   <body>
     <%= render 'layouts/header' %>
     <%= render 'layouts/flash' %>
-    <%= yield %>
+    <div style="min-height: 800px;">
+      <%= yield %>
+    </div>
     <%= render 'layouts/footer' %>
   </body>
 </html>

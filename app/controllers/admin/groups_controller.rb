@@ -1,4 +1,6 @@
 class Admin::GroupsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def show
     @group = Group.find(params[:id])
     @leader = User.find_by(id: @group.leader_id)
@@ -13,6 +15,4 @@ class Admin::GroupsController < ApplicationController
       
   end
 
-  def destroy
-  end
 end

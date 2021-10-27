@@ -1,4 +1,16 @@
 class PhrasesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user
+
+  # 所属グループ以外の投稿の閲覧・編集ができないようにする
+  def ensure_current_user
+    @group = Group.find(params[:group_id])
+    unless GroupUser.exists?(group_id: @group.id, user_id: current_user.id)
+      flash[:notice] = "Not authorized"
+      redirect_to root_path
+    end
+  end
+
   def index
     @group = Group.find(params[:group_id])
     @phrase = Phrase.new
@@ -42,6 +54,8 @@ class PhrasesController < ApplicationController
 
   def edit
     @phrase = Phrase.find(params[:id])
+    @content = @phrase.content
+    @japanese = @phrase.japanese
   end
 
   def update

@@ -1,7 +1,16 @@
 class KnowledgesController < ApplicationController
-  def new
-  end
+  before_action :authenticate_user!
+  before_action :ensure_current_user
 
+  # 所属グループ以外の投稿の閲覧、編集ができないようにする
+  def ensure_current_user
+    @group = Group.find(params[:group_id])
+    unless GroupUser.exists?(group_id: @group.id, user_id: current_user.id)
+      flash[:notice] = "Not authorized"
+      redirect_to root_path
+    end
+  end
+  
   def create
     @phrase = Phrase.find(params[:phrase_id])
     @knowledge = Knowledge.new(knowledge_params)
@@ -20,6 +29,8 @@ class KnowledgesController < ApplicationController
 
   def edit
     @knowledge = Knowledge.find(params[:id])
+    @content = @knowledge.content
+    @genre = @knowledge.status
   end
 
   def update
@@ -44,7 +55,6 @@ class KnowledgesController < ApplicationController
     @knowledge = Knowledge.find(params[:id])
     @knowledge.destroy
     redirect_to request.referer
-
   end
 
   private

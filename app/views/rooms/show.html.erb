@@ -14,12 +14,21 @@
   <% end %>
 
   <div class="chats">
+    <!--DM投稿-->
+    <div class="posts">
+      <%= form_with model:@message, local:true do |f| %>
+        <%= render 'layouts/errors', model: f.object %>
+        <%= f.text_field :content, placeholder: "Input messages", class: "form-text-field w-100" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "投稿", class: 'form_submit btn btn-success my-2' %>
+      <% end %>
+    </div>
     <!--DM内容-->
     <div class="chat">
       <% if @messages.present? %>
         <% @messages.each do |m| %>
           <div class="my-3">
-            <div class="chat-user">
+            <div class="chat-user mb-1">
                <%= attachment_image_tag m.user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "40x40"%>
                <%= m.user.name %>
             </div>
@@ -37,15 +46,6 @@
             </div>
           </div>
         <% end %>
-      <% end %>
-    </div>
-    <!--DM投稿-->
-    <div class="posts">
-      <%= form_with model:@message, local:true do |f| %>
-        <%= render 'layouts/errors', model: f.object %>
-        <%= f.text_field :content, placeholder: "Input messages", class: "form-text-field w-100" %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-        <%= f.submit "投稿", class: 'form_submit btn btn-success my-2' %>
       <% end %>
     </div>
   </div>

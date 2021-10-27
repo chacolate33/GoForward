@@ -1,19 +1,27 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user, only: [:edit, :update]
+  
+  # グループ作成者でないと、そのグループの編集をできないようにする
+  def ensure_current_user
+    @group = Group.find(params[:id])
+    if current_user.id != @group.leader_id
+      flash[:notice] = "Not authorized"
+      redirect_to root_path
+    end
+  end
+  
   def new
     @group = Group.new
-    # @group.users << current_user
   end
 
   def create
     @group = Group.new(group_params)
     @group.leader_id = current_user.id
     @group.users << current_user
-    if @group.password == ""
-      @group.password = nil
-    end
     
     if @group.save
-      redirect_to user_path(current_user), notice: 'グループを作成しました'
+      redirect_to user_path(current_user), notice: 'You have made new group.'
     else
       render :new
     end

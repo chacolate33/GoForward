@@ -2,24 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+.topic p {
+  font-size: 20px;
+}
 .select {
   background-color: #ffffff;
-  // width: 650px;
-  // height: 170px;
+  max-width: 690px !important;
+  .container {
+    justify-content: space-between;
+    
+    .new {
+      width: 300px;
+    }
 
-  table {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-
-    td {
-      min-width: 150px;
-      min-height: 150px;
-
-     div {
+    div {
       background-color: #e8e1d2;
       margin: 5px 0;
+      width: 150px;
+      height: 150px;
 
       .link {
         display: block;
@@ -27,16 +27,39 @@
         height: 100%;
         text-decoration: none;
 
-          p {
+        p {
             display: block;
             width: 100%;
             height: 100%;
             text-align: center;
             color: #534a42;
             line-height: 150px;
-            }
-          }
-       }
+        }
       }
     }
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .topic p {
+    font-size: 15px;
+  }
+
+  .select {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    .container {
+      padding: 5px auto;
+      
+      .new {
+       width: 100%;  
+      }
+      
+     div {
+       margin: 5px auto;
+       width: 100%;
+     }
+    }
+  }
 }

@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user, only: [:edit, :update]
+
+  # 他ユーザーの情報を編集できないようにする
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      flash[:notice] = "Not authorized"
+      redirect_to root_path
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     # 以下所属グループ一覧の記述
@@ -35,12 +46,13 @@ class UsersController < ApplicationController
     @user = current_user
     @user.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理を実行いたしました"
+    flash[:notice] = "The withdrawral process has been executed."
     redirect_to root_path
   end
 
   def edit
     @user = User.find(params[:id])
+
   end
 
   def update
