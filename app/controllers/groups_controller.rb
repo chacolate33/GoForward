@@ -58,11 +58,12 @@ class GroupsController < ApplicationController
       user = User.find_by(id: group_user.user_id)
       @users.push(user)
     end
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
 
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.all.order(created_at: "DESC").page(params[:page]).per(20)
   end
 
   def destroy

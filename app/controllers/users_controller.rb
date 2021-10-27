@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       group = Group.find_by(id: group_user.group_id)
       @groups.push(group)
     end
+    @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(20)
 
     # 以下DM機能の記述
     @currentUserEntry = Entry.where(user_id: current_user.id)

@@ -1,26 +1,29 @@
- <% phrases.each do |phrase| %>
-    <div class="container border post py-2 pl-4 my-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-1">
-          <!--ブックマーク-->
-          <%= render 'bookmarks/button', phrase: phrase %>
-          </div>
-          <div class="col-11">
-          <!--英語と訳-->
-            <%= link_to group_phrase_path(group_id: phrase.group_id, id: phrase.id) do %>
-              <h3 style="color: #212529;"><%= phrase.content %></h3>
-              <h3 style="color: #212529;"><%= phrase.japanese %></h3>
-            <% end %>
-          </div>
+<% phrases.each do |phrase| %>
+  <div class="container border post py-2 pl-4 my-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-1">
+        <!--ブックマーク-->
+        <%= render 'bookmarks/button', phrase: phrase %>
+        </div>
+        <div class="col-11">
+        <!--英語と訳-->
+          <%= link_to group_phrase_path(group_id: phrase.group_id, id: phrase.id) do %>
+            <h3 style="color: #212529;"><%= phrase.content %></h3>
+            <h3 style="color: #212529;"><%= phrase.japanese %></h3>
+          <% end %>
         </div>
       </div>
-      <div>
-        <span>知識<%= phrase.knowledges.count %>件</span>
-        <% if phrase.user_id == current_user.id %>
-          <%= link_to "Edit", edit_group_phrase_path(group_id: phrase.group_id, id: phrase.id), class: 'btn btn-success' %>
-          <%= link_to "Delete", group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
-        <% end %>
-      </div>
     </div>
-  <% end %>
+    <div>
+      <span>知識<%= phrase.knowledges.count %>件</span>
+      <% if phrase.user_id == current_user.id %>
+        <%= link_to "Edit", edit_group_phrase_path(group_id: phrase.group_id, id: phrase.id), class: 'btn btn-success' %>
+        <%= link_to "Delete", group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<%= paginate phrases %>
+
+  

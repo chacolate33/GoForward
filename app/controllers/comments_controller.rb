@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-　before_action :authenticate_user!  
 
   def create
     @knowledge = Knowledge.find(params[:knowledge_id])
