@@ -39,7 +39,6 @@
   <div>
     <h4>Comment</h4>
     <%= form_with url: group_phrase_knowledge_comments_path(knowledge_id: @knowledge.id) do |f| %>
-      <%= render 'layouts/errors', model: @comment %>
       <div class="form-group">
         <%= f.text_area :content, class: 'form-control text-area' %>
       </div>

@@ -7,17 +7,17 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.knowledge_id = @knowledge.id
     if @comment.save
-      @comments = Comment.where(knowledge_id: @knowledge.id)
+      @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
     else
       @knowledge = Knowledge.find(params[:knowledge_id])
       @phrase = Phrase.find_by(id: @knowledge.phrase_id)
-      @comments = Comment.where(knowledge_id: @knowledge.id)
+      @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
     end
   end
 
   def destroy
     @knowledge = Knowledge.find(params[:knowledge_id])
-    @comments = Comment.where(knowledge_id: @knowledge.id)
+    @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
     @comment = Comment.find(params[:id])
     @comment.destroy
   end
