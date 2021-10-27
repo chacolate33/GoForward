@@ -2,7 +2,7 @@ class GroupUser < ApplicationRecord
   # アソシエーション
   belongs_to :group
   belongs_to :user
-  
+
   # バリデーション
   validates :user_id, presence: true
   validates :group_id, presence: true
