@@ -12,7 +12,8 @@ class Admin::GroupsController < ApplicationController
       user = User.find_by(id: group_user.user_id)
       @users.push(user)
     end
-      
+    
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
   end
 
 end

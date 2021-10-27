@@ -1,6 +1,6 @@
 class Admin::PhrasesController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @group = Group.find(params[:group_id])
     if params[:sort_abc]
@@ -17,6 +17,7 @@ class Admin::PhrasesController < ApplicationController
     else
       @phrases = Phrase.where(group_id: @group.id)
     end
+    @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
   end
 
   def show
@@ -31,5 +32,6 @@ class Admin::PhrasesController < ApplicationController
     else
       @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
     end
+    @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
   end
 end

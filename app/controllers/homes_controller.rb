@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   before_action :authenticate_user!, only: [:myphrase]
-  
+
   def top
   end
 
@@ -12,6 +12,9 @@ class HomesController < ApplicationController
       phrase = bookmark.phrase
       @phrases.push(phrase)
     end
+
+    @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
+    
     # 並び替え機能
     # if params[:sort_abc]
     #   @phrases.sort_by{|array| array.content}

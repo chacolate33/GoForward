@@ -48,7 +48,7 @@ class KnowledgesController < ApplicationController
     @knowledge = Knowledge.find(params[:id])
     @phrase = Phrase.find_by(id: @knowledge.phrase_id)
     @comment = Comment.new
-    @comments = Comment.where(knowledge_id: @knowledge.id)
+    @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
   end
 
   def destroy

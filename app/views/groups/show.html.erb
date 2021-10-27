@@ -3,7 +3,7 @@
   <!--グループの情報-->
   <div class="text-center">
     <%= attachment_image_tag @group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "80x80"%>
-    
+
     <table class="my-3 center">
       <tbody>
         <tr>
@@ -20,13 +20,13 @@
         </tr>
       </tbody>
     </table>
-    
+
     <!--退出のリンクへ飛ぶためにIDを定義-->
      <% if GroupUser.exists?(group_id: @group.id, user_id: current_user.id) %>
       <% group_user = GroupUser.find_by(group_id: @group.id, user_id: current_user.id) %>
       <% id = group_user.id %>
      <% end %>
-     
+
     <% if @group.leader_id != current_user.id %>
       <% if GroupUser.exists?(group_id: @group.id, user_id: current_user.id) %>
         <%= link_to "Leave", group_user_path(id: id, group_id: @group.id), method: :delete, class: 'btn btn-danger' %>
@@ -39,7 +39,9 @@
         <% end %>
       <% end %>
     <% else %>
-      <%= link_to "Waiting User", group_applies_path(@group), class: 'btn btn-primary' %>
+      <% if @applies.present? %>
+        <%= link_to "Waiting User", group_applies_path(@group), class: 'btn btn-primary' %>
+      <% end %>
       <%= link_to "Edit", edit_group_path(@group.id), class: 'btn btn-primary' %>
     <% end %>
   </div>

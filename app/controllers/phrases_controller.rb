@@ -29,6 +29,7 @@ class PhrasesController < ApplicationController
     else
       @phrases = Phrase.where(group_id: @group.id)
     end
+    @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
   end
 
   def show
@@ -44,6 +45,7 @@ class PhrasesController < ApplicationController
     else
       @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
     end
+    @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
   end
 
   def destroy

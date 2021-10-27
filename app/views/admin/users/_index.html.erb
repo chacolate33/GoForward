@@ -7,6 +7,7 @@
         <th>Status</th>
         <th>Follows</th>
         <th>Followers</th>
+        <th>Introduction</th>
       </tr>
     </thead>
     <tbody>
@@ -34,8 +35,15 @@
           <td>
             Followers: <%= link_to admin_user_followers_path(user.id) do %><%= user.followers.count %><% end %>
           </td>
+          <td>
+            <% if user.introduction.present? %>
+              <%= user.introduction.truncate(30) %>
+            <% end %>
+          </td>
         <tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= paginate users %>
