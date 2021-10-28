@@ -3,7 +3,8 @@ class HomesController < ApplicationController
 
   def top
   end
-
+  
+  # ブックマーク一覧
   def myphrase
     @bookmarks = Bookmark.where(user_id: current_user.id)
     # それぞれのブックマークに対応するフレーズを集める

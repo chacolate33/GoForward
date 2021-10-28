@@ -39,10 +39,12 @@ class UsersController < ApplicationController
       end
     end
   end
-
+  
+  # 退会確認画面
   def confirm
   end
-
+  
+  # 退会処理
   def leave
     @user = current_user
     @user.update(is_deleted: true)

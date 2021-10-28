@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
   before_action :authenticate_user!
-  # フォロー機能の作成・保存・削除
+  # フォロー・フォロー取り消し
   def create
     current_user.follow(params[:user_id])
     redirect_to request.referer

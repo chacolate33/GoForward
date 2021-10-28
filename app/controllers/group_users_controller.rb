@@ -7,6 +7,7 @@ class GroupUsersController < ApplicationController
     @group_user = GroupUser.new
     @group_user.user_id = group_user_params[:user_id]
     @group_user.group_id = @params
+    # グループのユーザーとして保存し、グループ参加申請を消す
     @group_user.save
     apply = Apply.find(group_user_params[:apply_id])
     apply.destroy
