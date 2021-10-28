@@ -7,7 +7,7 @@ class Admin::KnowledgesController < ApplicationController
     # 知識に紐づいたコメント一覧
     @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
   end
-  
+
   def destroy
     @group = Group.find(params[:group_id])
     @phrase = Phrase.find(params[:phrase_id])

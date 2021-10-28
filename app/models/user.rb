@@ -32,15 +32,17 @@ class User < ApplicationRecord
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
+
   # フォローを外す機能
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end
+
   # フォローする/外すボタンの表示を分けるための記載
   def following?(user)
     followings.include?(user)
   end
-  
+
   # 退会済みアカウントが同じアカウントでログインできないようにする制約
   def active_for_authentication?
     super && (is_deleted == false)
@@ -50,5 +52,4 @@ class User < ApplicationRecord
   def self.search_for(value)
     User.where('name LIKE?', '%' + value + '%')
   end
-
 end

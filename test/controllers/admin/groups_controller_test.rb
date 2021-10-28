@@ -10,5 +10,4 @@ class Admin::GroupsControllerTest < ActionDispatch::IntegrationTest
     get admin_groups_destroy_url
     assert_response :success
   end
-
 end

@@ -24,7 +24,6 @@ class KnowledgesController < ApplicationController
       @knowledges = Knowledge.where(phrase_id: @phrase.id).page(params[:page]).per(20)
       render 'phrases/show'
     end
-
   end
 
   def edit
@@ -65,5 +64,4 @@ class KnowledgesController < ApplicationController
   def knowledge_params
     params.permit(:content, :status)
   end
-
 end

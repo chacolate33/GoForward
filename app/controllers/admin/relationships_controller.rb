@@ -10,5 +10,4 @@ class Admin::RelationshipsController < ApplicationController
     user = User.find(params[:user_id])
     @users = user.followers.page(params[:page]).per(20)
   end
-
 end

@@ -1,6 +1,6 @@
 class GroupUsersController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     # グループのidを引数で取る
     @params = params[:group_id]
@@ -24,8 +24,8 @@ class GroupUsersController < ApplicationController
   end
 
   private
+
   def group_user_params
     params.permit(:group_id, :user_id, :apply_id)
   end
-
 end

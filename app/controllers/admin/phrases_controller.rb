@@ -12,15 +12,15 @@ class Admin::PhrasesController < ApplicationController
       @phrases = Phrase.where(group_id: @group.id).order(japanese: "ASC")
     # 投稿知識の多さで並び替え
     elsif params[:sort_knowledge]
-      @phrases = Phrase.where(group_id: @group.id).includes(:posted_phrases).sort {|a, b|
-          b.posted_phrases.includes(:knowledges).size <=>
-          a.posted_phrases.includes(:knowledges).size
-        }
+      @phrases = Phrase.where(group_id: @group.id).includes(:posted_phrases).sort do |a, b|
+        b.posted_phrases.includes(:knowledges).size <=>
+        a.posted_phrases.includes(:knowledges).size
+      end
     # 新しい順
     elsif params[:sort_new]
       @phrases = Phrase.where(group_id: @group.id).order(created_at: "DESC")
     else
-    # デフォルト(古い順)
+      # デフォルト(古い順)
       @phrases = Phrase.where(group_id: @group.id)
     end
     @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
@@ -31,10 +31,10 @@ class Admin::PhrasesController < ApplicationController
     # 知識の並び替え機能
     # いいねが多い順
     if params[:sort_favorite]
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort {|a, b|
-          b.favorited_knowledges.includes(:favorites).size <=>
-          a.favorited_knowledges.includes(:favorites).size
-        }
+      @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort do |a, b|
+        b.favorited_knowledges.includes(:favorites).size <=>
+        a.favorited_knowledges.includes(:favorites).size
+      end
     # デフォルト(ステータスごと)
     elsif params[:sort_status]
       @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)

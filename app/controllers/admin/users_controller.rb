@@ -30,5 +30,4 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.permit(:is_deleted)
   end
-
 end

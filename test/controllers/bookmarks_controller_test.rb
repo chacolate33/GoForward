@@ -15,5 +15,4 @@ class BookmarksControllerTest < ActionDispatch::IntegrationTest
     get bookmarks_destroy_url
     assert_response :success
   end
-
 end

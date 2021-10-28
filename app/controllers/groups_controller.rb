@@ -32,7 +32,6 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
-
   end
 
   def update
@@ -61,7 +60,6 @@ class GroupsController < ApplicationController
       @users.push(user)
     end
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
-
   end
 
   def index
@@ -75,6 +73,7 @@ class GroupsController < ApplicationController
   end
 
   private
+
   def group_params
     params.require(:group).permit(:name, :introduction, :image)
   end
