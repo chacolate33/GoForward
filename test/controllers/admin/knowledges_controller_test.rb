@@ -10,5 +10,4 @@ class Admin::KnowledgesControllerTest < ActionDispatch::IntegrationTest
     get admin_knowledges_destroy_url
     assert_response :success
   end
-
 end

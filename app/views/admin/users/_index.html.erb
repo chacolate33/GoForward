@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table-hover text-nowrap">
+  <table class="table-hover text-nowrap center">
     <thead>
       <tr>
         <th>Name</th>
@@ -30,14 +30,20 @@
             <% end %>
           </td>
           <td>
-            Follows: <%= link_to user_followings_path(user.id) do %><%= user.followings.count %><% end %>
+            Follows: <%= link_to admin_user_followings_path(user.id) do %><%= user.followings.count %><% end %>
           </td>
           <td>
-            Followers: <%= link_to user_followers_path(user.id) do %><%= user.followers.count %><% end %>
+            Followers: <%= link_to admin_user_followers_path(user.id) do %><%= user.followers.count %><% end %>
           </td>
-          <td><%= user.introduction.truncate(30) %></td>
+          <td>
+            <% if user.introduction.present? %>
+              <%= user.introduction.truncate(30) %>
+            <% end %>
+          </td>
         <tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= paginate users %>

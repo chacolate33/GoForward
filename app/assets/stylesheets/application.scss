@@ -13,23 +13,23 @@
  *= require_tree .
  *= require_self
  */
+ 
+// リセット・基本スタイル
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+p {
+  margin-bottom: 0 !important;
+}
+
 body {
 background-color: #f5efe9 !important;
 }
 
-p {
-  margin-bottom: 0 !important;
-}
 // header
-// header {
-//   height: 92px;
-// }
 
 .search_submit {
   border-radius: 5px;
@@ -37,6 +37,15 @@ p {
   color: #fff;
 }
 
+@media screen and (max-width: 991px) {
+  .navbar-nav {
+    .search {
+      width: 300px;
+      margin: 20px auto 0;
+    }
+  }
+
+}
 // devise
 // .label {
 //   display: inline-block;
@@ -46,12 +55,16 @@ p {
 
 // table
 
-table  {
-  // border-collapse: separate !important;
-  // border-spacing: 10px;
+.center {
+  margin: 0 auto;
 }
+
+.middle {
+  vertical-align: middle;  
+}
+
 table td{
-  padding: 3px 10px 3px 10px;
+  padding: 3px 10px;
 }
 
 table th {
@@ -62,5 +75,11 @@ table th {
 .post {
   background-color: #fff !important;
 }
+
+// kaminari
+.pagination {
+  justify-content: center;
+}
+
 
 @import "bootstrap";

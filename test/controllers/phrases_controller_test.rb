@@ -30,5 +30,4 @@ class PhrasesControllerTest < ActionDispatch::IntegrationTest
     get phrases_create_url
     assert_response :success
   end
-
 end

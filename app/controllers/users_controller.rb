@@ -1,4 +1,15 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user, only: [:edit, :update]
+
+  # 他ユーザーの情報を編集できないようにする
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      flash[:notice] = "Not authorized"
+      redirect_to root_path
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     # 以下所属グループ一覧の記述
@@ -8,6 +19,7 @@ class UsersController < ApplicationController
       group = Group.find_by(id: group_user.group_id)
       @groups.push(group)
     end
+    @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(20)
 
     # 以下DM機能の記述
     @currentUserEntry = Entry.where(user_id: current_user.id)
@@ -15,7 +27,7 @@ class UsersController < ApplicationController
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
-          if cu.room_id == u.room_id then
+          if cu.room_id == u.room_id
             @isRoom = true
             @roomId = cu.room.id
           end
@@ -28,14 +40,16 @@ class UsersController < ApplicationController
     end
   end
 
+  # 退会確認画面
   def confirm
   end
 
+  # 退会処理
   def leave
     @user = current_user
     @user.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理を実行いたしました"
+    flash[:notice] = "The withdrawral process has been executed."
     redirect_to root_path
   end
 
@@ -52,7 +66,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-
   end
 
   private

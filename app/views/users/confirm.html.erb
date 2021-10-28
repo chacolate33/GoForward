@@ -1,12 +1,14 @@
-<div class="container">
+<div class="container text-center my-3">
   <h2>退会手続き</h2>
   <p>
     退会をされますと、全てのサービスがご利用いただけなくなります。<br>
+    あなたが作成したグループに、ユーザーが新たに加入することができなくなります。<br>
     再度ご利用いただく場合には、新規登録のお手続きが必要になります。<br>
     本当に退会してよろしいですか？
   </p>
-
-  <%= link_to "退会しない", user_path(current_user), class: 'btn btn-primary' %>
-  <%= link_to "退会する", leave_path(current_user), data: {confirm: "本当に退会してもよろしいですか？"}, method: :patch, class: "btn btn-danger" %>
+  <div class="my-3">
+    <%= link_to "退会しない", user_path(current_user), class: 'btn btn-primary' %>
+    <%= link_to "退会する", leave_path(current_user), data: {confirm: "本当に退会してもよろしいですか？"}, method: :patch, class: "btn btn-danger" %>
+  </div>
 
 </div>

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="my-3 table-hover text-nowrap">
+  <table class="my-3 table-hover text-nowrap center">
     <thead>
       <tr>
         <th>Name</th>
@@ -7,18 +7,24 @@
         <th>Details</th>
       </tr>
     </thead>
-
+    
     <tbody>
       <% groups.each do |group| %>
         <tr>
           <td>
-            <%= link_to group_phrases_path(group.id) do %>
-              <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
-              <%= group.name %>
+            <!--ログイン中のユーザーがグループに所属しているなら、グループのフレーズ一覧へのリンクにする-->
+            <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
+              <%= link_to group_phrases_path(group.id) do %>
+                <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+                <%= group.name %>
+              <% end %>
+            <% else %>
+                <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+                <%= group.name %>
             <% end %>
           </td>
           <td>
-            <%= group.introduction.truncate(20) %>
+            <%= group.introduction.truncate(30) %>
           </td>
           <td>
             <%= link_to group_path(group.id) do %>
@@ -50,3 +56,5 @@
     </tbody>
   </table>
 </div>
+
+<%= paginate groups %>

@@ -8,13 +8,11 @@ class Group < ApplicationRecord
   attachment :image
 
   # バリデーション
-  validates :name, length: { minimum: 2, maximum: 20}
-  validates :introduction, length: { minimum: 1, maximum: 255}
+  validates :name, length: { minimum: 2, maximum: 20 }
+  validates :introduction, length: { minimum: 1, maximum: 255 }
 
   # 検索用
   def self.search_for(value)
     Group.where('name LIKE ?', '%' + value + '%')
   end
-
-
 end

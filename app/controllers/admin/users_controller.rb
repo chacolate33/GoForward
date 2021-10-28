@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
-    @users = User.all
+    @users = User.all.order(created_at: "DESC").page(params[:page]).per(20)
   end
 
   def show
@@ -12,18 +14,20 @@ class Admin::UsersController < ApplicationController
       group = Group.find_by(id: group_user.group_id)
       @groups.push(group)
     end
+    @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(20)
   end
 
   def update
+    # 退会ステータスの変更
     @user = User.find(params[:id])
     @user.update(user_params)
-    flash[:notice] = "ユーザー情報を編集しました。"
+    flash[:notice] = "You have updated the status successfully."
     redirect_to request.referer
   end
 
   private
+
   def user_params
     params.permit(:is_deleted)
   end
-
 end

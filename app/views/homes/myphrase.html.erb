@@ -1,4 +1,8 @@
 <div class="container my-3">
   <h2>Bookmark List</h2>
-  <%= render 'index', phrases: @phrases %>
+  <% if @phrases.present? %>
+    <%= render 'index', phrases: @phrases %>
+  <% else %>
+    <p>フレーズを登録して、効率よく学習を進めましょう。</p>
+  <% end %>
 </div>

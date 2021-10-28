@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  get 'applies/create'
-  get 'applies/destroy'
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
-    registrations: 'admins/registrations'
+    registrations: 'admins/registrations',
   }
 
   devise_for :users, controllers: {
@@ -42,12 +40,14 @@ Rails.application.routes.draw do
 
   get 'searches/search' => 'searches#search', as: 'search'
 
-
   namespace :admin do
     root to: 'homes#top'
-    resources :users, only: [:index, :show, :update]
+    resources :users, only: [:index, :show, :update] do
+      get 'followers' => 'relationships#followers', as: 'followers'
+      get 'followings' => 'relationships#followings', as: 'followings'
+    end
     resources :groups, only: [:show, :destroy] do
-      resources :phrases, only: [:index, :show] do
+      resources :phrases, only: [:index, :show, :destroy] do
         resources :knowledges, only: [:show, :destroy] do
           resources :comments, only: [:destroy]
         end

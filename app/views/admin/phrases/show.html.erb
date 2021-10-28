@@ -12,12 +12,12 @@
       <h3><%= @phrase.content %></h3>
       <h3><%= @phrase.japanese %></h3>
     </div>
-    <%= link_to "delete", group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to "delete", admin_group_phrase_path(group_id: @phrase.group_id, id: @phrase.id), method: :delete, class: 'btn btn-danger' %>
   </div>
-
+  <!--知識一覧-->
   <h4 class="my-3">Knowledges</h4>
   <% if @knowledges.present? %>
-  <h5>並び替え</h5>
+    <h5>並び替え</h5>
     <%= link_to 'いいねの多い順', admin_group_phrase_path(sort_favorite: "true") %>
     <br>
     <%= link_to 'ステータスごと', admin_group_phrase_path(sort_status: "true") %>
