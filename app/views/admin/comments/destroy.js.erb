@@ -1,0 +1,2 @@
+$("#knowledge_<%= @knowledge.id %> .comments-count").html("コメント<%= @knowledge.comments.count %>件");
+$(".comments").html("<%= j(render 'admin/comments/index', comments: @comments) %>");
