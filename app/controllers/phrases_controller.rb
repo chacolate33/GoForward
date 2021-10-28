@@ -47,7 +47,7 @@ class PhrasesController < ApplicationController
         b.favorited_knowledges.includes(:favorites).size <=>
         a.favorited_knowledges.includes(:favorites).size
       end
-      　 # デフォルト(ステータスごと)
+    # デフォルト(ステータスごと)
     elsif params[:sort_status]
       @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
     else
