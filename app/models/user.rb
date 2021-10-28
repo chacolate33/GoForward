@@ -45,7 +45,7 @@ class User < ApplicationRecord
 
   # 退会済みアカウントが同じアカウントでログインできないようにする制約
   def active_for_authentication?
-    super && (is_deleted == false)
+    super && (self.is_deleted == false)
   end
 
   # 検索用
