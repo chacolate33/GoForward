@@ -28,10 +28,11 @@
      <% end %>
 
     <% if @group.leader_id != current_user.id %>
+      <!--グループリーダーでなく、GroupUserが存在するなら退会ボタン-->
       <% if GroupUser.exists?(group_id: @group.id, user_id: current_user.id) %>
         <%= link_to "Leave", group_user_path(id: id, group_id: @group.id), method: :delete, class: 'btn btn-danger' %>
       <% else %>
-        <!--以下承認機能のために付け足したコード-->
+        <!--グループリーダーでなく、GroupUserがないなら、申請の有無で承認機能のボタンを設置-->
         <% if @apply %>
           <%= link_to 'Cancel', group_apply_path(@group, @apply), method: :delete, class: 'btn btn-danger text-line-none' %>
         <% else %>
@@ -39,6 +40,7 @@
         <% end %>
       <% end %>
     <% else %>
+      <!--グループリーダーであり、参加承認待ちのユーザーがいるのであれば、その一覧へのリンクを設置-->
       <% if @applies.present? %>
         <%= link_to "Waiting User", group_applies_path(@group), class: 'btn btn-primary' %>
       <% end %>

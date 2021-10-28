@@ -15,17 +15,22 @@ class PhrasesController < ApplicationController
     @group = Group.find(params[:group_id])
     @phrase = Phrase.new
     # 並び替え機能
+    # フレーズのアルファベッド順
     if params[:sort_abc]
       @phrases = Phrase.where(group_id: @group.id).order(content: "ASC")
+    # 和訳の五十音順
     elsif params[:sort_aiu]
       @phrases = Phrase.where(group_id: @group.id).order(japanese: "ASC")
+    # 投稿知識の多さで並び替え
     elsif params[:sort_knowledge]
-      @phrases = Phrase.where(group_id: @group.id).includes(:posted_phrases).sort {|a, b|
-          b.posted_phrases.includes(:knowledges).size <=>
-          a.posted_phrases.includes(:knowledges).size
-        }
+      @phrases = Phrase.where(group_id: @group.id).includes(:posted_phrases).sort do |a, b|
+        b.posted_phrases.includes(:knowledges).size <=>
+        a.posted_phrases.includes(:knowledges).size
+      end
+    # 新しい順
     elsif params[:sort_new]
       @phrases = Phrase.where(group_id: @group.id).order(created_at: "DESC")
+    # デフォルト(古い順)
     else
       @phrases = Phrase.where(group_id: @group.id)
     end
@@ -34,12 +39,15 @@ class PhrasesController < ApplicationController
 
   def show
     @phrase = Phrase.find(params[:id])
+    # 知識の並び替え機能
+    # いいねが多い順
     @knowledge = Knowledge.new
     if params[:sort_favorite]
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort {|a, b|
-          b.favorited_knowledges.includes(:favorites).size <=>
-          a.favorited_knowledges.includes(:favorites).size
-        }
+      @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort do |a, b|
+        b.favorited_knowledges.includes(:favorites).size <=>
+        a.favorited_knowledges.includes(:favorites).size
+      end
+      　 # デフォルト(ステータスごと)
     elsif params[:sort_status]
       @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
     else
@@ -71,7 +79,6 @@ class PhrasesController < ApplicationController
       render :edit
     end
   end
-
 
   def create
     @group = Group.find(params[:group_id])

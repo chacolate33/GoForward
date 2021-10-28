@@ -45,5 +45,4 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
     get groups_password_url
     assert_response :success
   end
-
 end

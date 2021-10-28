@@ -1,21 +1,22 @@
 class RelationshipsController < ApplicationController
   before_action :authenticate_user!
-  # フォロー機能の作成・保存・削除
+  # フォロー・フォロー取り消し
   def create
     current_user.follow(params[:user_id])
     redirect_to request.referer
   end
-   
+
   def destroy
     current_user.unfollow(params[:user_id])
     redirect_to request.referer
   end
+
   # フォロー・フォロワー一覧表示
   def followings
     user = User.find(params[:user_id])
     @users = user.followings.page(params[:page]).per(20)
   end
-  
+
   def followers
     user = User.find(params[:user_id])
     @users = user.followers.page(params[:page]).per(20)

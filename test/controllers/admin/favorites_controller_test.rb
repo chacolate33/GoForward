@@ -10,5 +10,4 @@ class Admin::FavoritesControllerTest < ActionDispatch::IntegrationTest
     get admin_favorites_followings_url
     assert_response :success
   end
-
 end

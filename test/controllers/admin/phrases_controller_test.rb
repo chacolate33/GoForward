@@ -10,5 +10,4 @@ class Admin::PhrasesControllerTest < ActionDispatch::IntegrationTest
     get admin_phrases_show_url
     assert_response :success
   end
-
 end

@@ -18,6 +18,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    # 退会ステータスの変更
     @user = User.find(params[:id])
     @user.update(user_params)
     flash[:notice] = "You have updated the status successfully."
@@ -29,5 +30,4 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.permit(:is_deleted)
   end
-
 end

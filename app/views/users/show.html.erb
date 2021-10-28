@@ -58,7 +58,7 @@
     <div class="my-3">
       <% if @user == current_user %>
         <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
-        <%= link_to "グループを作成する", new_group_path, class: "btn btn-success" %>
+        <%= link_to "Make new group", new_group_path, class: "btn btn-success" %>
       <% end %>
     </div>
   </div>

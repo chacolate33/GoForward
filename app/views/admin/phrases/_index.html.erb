@@ -1,18 +1,17 @@
 <% phrases.each do |phrase| %>
   <div class="container border post py-2 pl-4 my-3">
     <div class="container">
-        <!--ブックマーク-->
-        <div class="col-11">
-        <!--英語と訳-->
-          <h3><%= phrase.content.truncate(15) %></h3>
-          <h3><%= phrase.japanese.truncate(15) %></h3>
-        </div>
+      <div class="col-11">
+      <!--英語と訳-->
+        <h3><%= phrase.content.truncate(15) %></h3>
+        <h3><%= phrase.japanese.truncate(15) %></h3>
       </div>
-      <div>
-        <span>知識<%= phrase.knowledges.count %>件</span>
-        <%= link_to "Details", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>
-        <%= link_to "Delete", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
-      </div>
+    </div>
+    <div>
+      <span>知識<%= phrase.knowledges.count %>件</span>
+      <%= link_to "Details", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>
+      <%= link_to "Delete", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
+    </div>
   </div>
 <% end %>
 

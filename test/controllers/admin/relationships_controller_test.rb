@@ -10,5 +10,4 @@ class Admin::RelationshipsControllerTest < ActionDispatch::IntegrationTest
     get admin_relationships_followings_url
     assert_response :success
   end
-
 end

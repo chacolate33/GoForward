@@ -24,7 +24,6 @@ class KnowledgesController < ApplicationController
       @knowledges = Knowledge.where(phrase_id: @phrase.id).page(params[:page]).per(20)
       render 'phrases/show'
     end
-
   end
 
   def edit
@@ -48,6 +47,7 @@ class KnowledgesController < ApplicationController
     @knowledge = Knowledge.find(params[:id])
     @phrase = Phrase.find(params[:phrase_id])
     @comment = Comment.new
+    # 知識に対するコメント一覧
     @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
   end
 
@@ -64,5 +64,4 @@ class KnowledgesController < ApplicationController
   def knowledge_params
     params.permit(:content, :status)
   end
-
 end

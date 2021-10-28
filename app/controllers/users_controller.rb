@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
-          if cu.room_id == u.room_id then
+          if cu.room_id == u.room_id
             @isRoom = true
             @roomId = cu.room.id
           end
@@ -40,9 +40,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # 退会確認画面
   def confirm
   end
 
+  # 退会処理
   def leave
     @user = current_user
     @user.update(is_deleted: true)
@@ -53,7 +55,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-
   end
 
   def update
@@ -65,7 +66,6 @@ class UsersController < ApplicationController
     else
       render :edit
     end
-
   end
 
   private
