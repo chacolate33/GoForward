@@ -9,6 +9,7 @@ class Knowledge < ApplicationRecord
   # バリデーション
   validates :content, presence: true
 
+  # current_userがいいねしているかどうかでviewを変える
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

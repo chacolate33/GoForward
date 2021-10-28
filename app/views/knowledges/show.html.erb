@@ -36,6 +36,7 @@
       <% end %>
     </div>
   </div>
+  <!--コメント一覧・フォーム-->
   <div>
     <h4>Comment</h4>
     <%= form_with url: group_phrase_knowledge_comments_path(knowledge_id: @knowledge.id) do |f| %>
@@ -49,6 +50,5 @@
     <div class="comments">
     <%= render 'comments/index', comments: @comments %>
     </div>
-
   </div>
 </div>

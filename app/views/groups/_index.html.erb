@@ -7,11 +7,12 @@
         <th>Details</th>
       </tr>
     </thead>
-
+    
     <tbody>
       <% groups.each do |group| %>
         <tr>
           <td>
+            <!--ログイン中のユーザーがグループに所属しているなら、グループのフレーズ一覧へのリンクにする-->
             <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
               <%= link_to group_phrases_path(group.id) do %>
                 <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
@@ -21,7 +22,6 @@
                 <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
                 <%= group.name %>
             <% end %>
-
           </td>
           <td>
             <%= group.introduction.truncate(30) %>

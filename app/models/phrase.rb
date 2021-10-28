@@ -10,6 +10,7 @@ class Phrase < ApplicationRecord
   validates :content, presence: true
   validates :japanese, presence: true
   
+  # current_userがブックマークしているかそうでないかでviewを変える
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?
   end
