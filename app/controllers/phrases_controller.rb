@@ -89,7 +89,7 @@ class PhrasesController < ApplicationController
       flash[:notice] = "You have created phrase successfullly."
       redirect_to group_phrases_path(@group.id)
     else
-      @phrases = Phrase.where(group_id: @group.id).order(:status)
+      @phrases = Phrase.where(group_id: @group.id)
       @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
       render :index
     end
