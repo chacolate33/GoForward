@@ -21,7 +21,7 @@
                 <%= attachment_image_tag group, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
                 <%= group.name %>
             <% end %>
-      
+
           </td>
           <td>
             <%= group.introduction.truncate(30) %>
