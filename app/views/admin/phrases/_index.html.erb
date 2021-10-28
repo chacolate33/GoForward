@@ -11,7 +11,7 @@
       <div>
         <span>知識<%= phrase.knowledges.count %>件</span>
         <%= link_to "Details", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id) %>
-        <%= link_to "Delete", group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
+        <%= link_to "Delete", admin_group_phrase_path(group_id: phrase.group_id, id: phrase.id), method: :delete, class: 'btn btn-danger' %>
       </div>
   </div>
 <% end %>

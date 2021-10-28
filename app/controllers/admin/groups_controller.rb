@@ -15,5 +15,11 @@ class Admin::GroupsController < ApplicationController
     
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
   end
+  
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to admin_root_path
+  end 
 
 end

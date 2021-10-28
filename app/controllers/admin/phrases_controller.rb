@@ -34,4 +34,11 @@ class Admin::PhrasesController < ApplicationController
     end
     @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
   end
+
+  def destroy
+    @group = Group.find(params[:group_id])
+    @phrase = Phrase.find(params[:id])
+    @phrase.destroy
+    redirect_to admin_group_phrases_path(group_id: @group.id)
+  end
 end

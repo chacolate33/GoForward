@@ -19,6 +19,7 @@
         </tr>
       </tbody>
     </table>
+    <%= link_to "Delete", admin_group_path(id: @group.id), method: :delete, class: 'btn btn-danger' %>
   </div>
   <!--メンバー一覧-->
   <div class="my-3">

@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
     end
     resources :groups, only: [:show, :destroy] do
-      resources :phrases, only: [:index, :show] do
+      resources :phrases, only: [:index, :show, :destroy] do
         resources :knowledges, only: [:show, :destroy] do
           resources :comments, only: [:destroy]
         end
