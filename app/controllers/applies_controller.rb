@@ -6,7 +6,8 @@ class AppliesController < ApplicationController
     flash[:notice] = "You applied to join the group."
     redirect_to request.referer
   end
-  　 # グループ加入申請の拒否と取り消し
+
+  # グループ加入申請の拒否と取り消し
   def destroy
     @apply = Apply.find(params[:id])
     @apply.destroy
