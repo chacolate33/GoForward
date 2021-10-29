@@ -48,7 +48,7 @@
           </td>
           <% if group.leader_id == current_user.id %>
             <td>
-              <%= link_to "Delete", group_path(id: group.id), method: :delete, class: 'btn btn-danger' %>
+              <%= link_to "Delete", group_path(id: group.id), data: {confirm: "本当に削除しますか？"}, method: :delete, class: 'btn btn-danger' %>
             </td>
           <% end %>
         </tr>
