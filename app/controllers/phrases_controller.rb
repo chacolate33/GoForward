@@ -38,7 +38,7 @@ class PhrasesController < ApplicationController
   end
 
   def show
-    # 表示すべきphraseがあれば表示する
+    # 表示すべきphraseがあればページを表示
     if Phrase.exists?(params[:id])
       @phrase = Phrase.find(params[:id])
       # 知識の並び替え機能
@@ -57,7 +57,7 @@ class PhrasesController < ApplicationController
       end
       @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
     else
-      # プレーズを削除して、それが存在しない場合は、フレーズ一覧に遷移してエラーを
+      # プレーズを削除して、それが存在しない場合は、フレーズ一覧に遷移してエラーを防ぐ
       @group = Group.find(params[:group_id])
       redirect_to group_phrases_path(@group)
     end
