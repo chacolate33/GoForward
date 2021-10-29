@@ -19,11 +19,11 @@
         </tr>
         <tr>
           <th>Follows</th>
-          <td><%= link_to user_followings_path(@user.id) do %><%= @user.followings.count %><% end %></td>
+          <td><%= link_to user_followings_path(@user) do %><%= @user.followings.count %><% end %></td>
         </tr>
         <tr>
           <th>Followers</th>
-          <td><%= link_to user_followers_path(@user.id) do %><%= @user.followers.count %><% end %></td>
+          <td><%= link_to user_followers_path(@user) do %><%= @user.followers.count %><% end %></td>
         </tr>
       </tbody>
     </table>
@@ -32,9 +32,9 @@
        　<!--フォロー登録のボタン-->
         <div class="text-center">
           <% if current_user.following?(@user) %>
-          　<%= link_to "Unfolow", user_relationships_path(@user.id), method: :delete, class: 'btn btn-danger' %>
+          　<%= link_to "Unfolow", user_relationships_path(@user), method: :delete, class: 'btn btn-danger' %>
           <% else %>
-            <%= link_to "Follow", user_relationships_path(@user.id), method: :post, class: 'btn btn-primary'%>
+            <%= link_to "Follow", user_relationships_path(@user), method: :post, class: 'btn btn-primary'%>
           <% end %>
         </div>
       　<!--DMのためのボタン-->
@@ -57,7 +57,7 @@
     </div>
     <div class="my-3">
       <% if @user == current_user %>
-        <%= link_to "Edit", edit_user_path(@user.id), class: 'btn btn-primary' %>
+        <%= link_to "Edit", edit_user_path(@user), class: 'btn btn-primary' %>
         <%= link_to "Make new group", new_group_path, class: "btn btn-success" %>
       <% end %>
     </div>
@@ -66,7 +66,7 @@
   <% if @user == current_user %>
     <h2>Your Group</h2>
   <% else %>
-    <h2><%= @user.name =%>'s Group</h2>
+    <h2><%= @user.name %>'s Group</h2>
   <% end %>
   <% if @groups.present? %>
     <%= render 'groups/index', groups: @groups %>

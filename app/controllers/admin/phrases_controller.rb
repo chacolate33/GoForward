@@ -55,6 +55,6 @@ class Admin::PhrasesController < ApplicationController
     @group = Group.find(params[:group_id])
     @phrase = Phrase.find(params[:id])
     @phrase.destroy
-    redirect_to admin_group_phrases_path(group_id: @group.id)
+    redirect_to admin_group_phrases_path(@group)
   end
 end

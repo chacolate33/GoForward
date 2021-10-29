@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @user.update(user_params)
     if @user.save
       flash[:notice] = "You have updated your infomation successfully."
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user)
     else
       render :edit
     end

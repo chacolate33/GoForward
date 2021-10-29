@@ -1,6 +1,6 @@
 <div class="container my-3">
   <h2>Phrase Edit</h2>
-  <%= form_with url: group_phrase_path(id: @phrase.id), method: :patch, local:true do |f| %>
+  <%= form_with url: group_phrase_path(@group, @phrase), method: :patch, local:true do |f| %>
     <%= render 'layouts/errors', model: @phrase %>
     <div class="form-group">
       <%= f.label :content %>

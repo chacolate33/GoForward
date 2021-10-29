@@ -24,17 +24,17 @@
               <% end %>
               </td>
               <td>
-                Follows: <%= link_to user_followings_path(app.user_id) do %><%= app.user.followings.count %><% end %>
+                Follows: <%= link_to user_followings_path(app.user) do %><%= app.user.followings.count %><% end %>
               </td>
               <td>
-                Followers: <%= link_to user_followers_path(app.user_id) do %><%= app.user.followers.count %><% end %>
+                Followers: <%= link_to user_followers_path(app.user) do %><%= app.user.followers.count %><% end %>
               </td>
               <td class="text-center">
                 <% if app.user != current_user %>
                   <% if current_user.following?(app.user) %>
-                    <%= link_to "Unfolow", user_relationships_path(app.user.id), method: :delete, class: 'btn btn-danger' %>
+                    <%= link_to "Unfolow", user_relationships_path(app.user), method: :delete, class: 'btn btn-danger' %>
                   <% else %>
-                    <%= link_to "Follow", user_relationships_path(app.user.id), method: :post, class: 'btn btn-primary'%>
+                    <%= link_to "Follow", user_relationships_path(app.user), method: :post, class: 'btn btn-primary'%>
                   <% end %>
                 <% end %>
               </td>

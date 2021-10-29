@@ -67,21 +67,23 @@ class PhrasesController < ApplicationController
     @group = Group.find(params[:group_id])
     @phrase = Phrase.find(params[:id])
     @phrase.destroy
-    redirect_to group_phrases_path(group_id: @group.id)
+    redirect_to group_phrases_path(@group)
   end
 
   def edit
     @phrase = Phrase.find(params[:id])
+    @group = Group.find(params[:group_id])
     @content = @phrase.content
     @japanese = @phrase.japanese
   end
 
   def update
     @phrase = Phrase.find(params[:id])
+    @group = Group.find(params[:group_id])
     @phrase.update(phrase_params)
     if @phrase.save
       flash[:notice] = "You have updated phrase successfully."
-      redirect_to group_phrases_path(group_id: @phrase.group_id)
+      redirect_to group_phrases_path(@phrase.group_id)
     else
       render :edit
     end
@@ -94,7 +96,7 @@ class PhrasesController < ApplicationController
     @phrase.user_id = current_user.id
     if @phrase.save
       flash[:notice] = "You have created phrase successfullly."
-      redirect_to group_phrases_path(@group.id)
+      redirect_to group_phrases_path(@group)
     else
       @phrases = Phrase.where(group_id: @group.id)
       @phrases = Kaminari.paginate_array(@phrases).page(params[:page]).per(20)
