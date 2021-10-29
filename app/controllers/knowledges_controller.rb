@@ -18,7 +18,7 @@ class KnowledgesController < ApplicationController
     @knowledge.phrase_id = @phrase.id
     if @knowledge.save
       flash[:notice] = "You have created knowledge successfully."
-      redirect_to group_phrase_path(@phrase)
+      redirect_to group_phrase_path(id: @phrase.id)
     else
       @phrase = Phrase.find(params[:phrase_id])
       @knowledges = Knowledge.where(phrase_id: @phrase.id).page(params[:page]).per(20)
