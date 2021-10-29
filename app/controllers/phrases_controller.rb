@@ -56,7 +56,8 @@ class PhrasesController < ApplicationController
       end
       @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
     else
-      
+      @group = Group.find(params[:group_id])
+      redirect_to group_phrases_path(@group)
   end
 
   def destroy
