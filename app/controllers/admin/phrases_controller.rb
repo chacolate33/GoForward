@@ -27,21 +27,28 @@ class Admin::PhrasesController < ApplicationController
   end
 
   def show
-    @phrase = Phrase.find(params[:id])
-    # 知識の並び替え機能
-    # いいねが多い順
-    if params[:sort_favorite]
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort do |a, b|
-        b.favorited_knowledges.includes(:favorites).size <=>
-        a.favorited_knowledges.includes(:favorites).size
+    # 表示すべきphraseがあればページを表示
+    if Phrase.exists?(params[:id])
+      @phrase = Phrase.find(params[:id])
+      # 知識の並び替え機能
+      # いいねが多い順
+      if params[:sort_favorite]
+        @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort do |a, b|
+          b.favorited_knowledges.includes(:favorites).size <=>
+          a.favorited_knowledges.includes(:favorites).size
+        end
+      # デフォルト(ステータスごと)
+      elsif params[:sort_status]
+        @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
+      else
+        @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
       end
-    # デフォルト(ステータスごと)
-    elsif params[:sort_status]
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
+      @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
     else
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
+    　# プレーズを削除して、それが存在しない場合は、フレーズ一覧に遷移してエラーを防ぐ
+      @group = Group.find(params[:group_id])
+      redirect_to admin_group_phrases_path(@group)
     end
-    @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
   end
 
   def destroy
