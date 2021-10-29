@@ -18,7 +18,7 @@ class KnowledgesController < ApplicationController
     @knowledge.phrase_id = @phrase.id
     if @knowledge.save
       flash[:notice] = "You have created knowledge successfully."
-      redirect_to group_phrase_path(id: @phrase.id)
+      redirect_to group_phrase_path(@phrase)
     else
       @phrase = Phrase.find(params[:phrase_id])
       @knowledges = Knowledge.where(phrase_id: @phrase.id).page(params[:page]).per(20)
@@ -28,16 +28,18 @@ class KnowledgesController < ApplicationController
 
   def edit
     @knowledge = Knowledge.find(params[:id])
+    @group = Group.find(params[:group_id])
     @content = @knowledge.content
     @genre = @knowledge.status
   end
 
   def update
     @knowledge = Knowledge.find(params[:id])
+    @group = Group.find(params[:group_id])
     @knowledge.update(knowledge_params)
     if @knowledge.save
       flash[:notice] = "You have updated phrase successfully."
-      redirect_to group_phrase_path(group_id: @knowledge.phrase.group_id, id: @knowledge.phrase.id)
+      redirect_to group_phrase_path(@group, @knowledge.phrase)
     else
       render :edit
     end

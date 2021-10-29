@@ -30,10 +30,10 @@
             <% end %>
           </td>
           <td>
-            Follows: <%= link_to admin_user_followings_path(user.id) do %><%= user.followings.count %><% end %>
+            Follows: <%= link_to admin_user_followings_path(user) do %><%= user.followings.count %><% end %>
           </td>
           <td>
-            Followers: <%= link_to admin_user_followers_path(user.id) do %><%= user.followers.count %><% end %>
+            Followers: <%= link_to admin_user_followers_path(user) do %><%= user.followers.count %><% end %>
           </td>
           <td>
             <% if user.introduction.present? %>

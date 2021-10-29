@@ -15,11 +15,11 @@
           </tr>
           <tr>
             <th>Follows</th>
-            <td><%= link_to admin_user_followings_path(@user.id) do %><%= @user.followings.count %><% end %></td>
+            <td><%= link_to admin_user_followings_path(@user) do %><%= @user.followings.count %><% end %></td>
           </tr>
           <tr>
             <th>Followers</th>
-            <td><%= link_to admin_user_followers_path(@user.id) do %><%= @user.followers.count %><% end %></td>
+            <td><%= link_to admin_user_followers_path(@user) do %><%= @user.followers.count %><% end %></td>
           </tr>
         </tbody>
       </table>

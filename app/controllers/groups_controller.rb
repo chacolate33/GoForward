@@ -39,7 +39,7 @@ class GroupsController < ApplicationController
     @group.update(group_params)
     if @group.save
       flash[:notice] = "You have updated group successfully."
-      redirect_to group_path(@group.id)
+      redirect_to group_path(@group)
     else
       render :edit
     end
