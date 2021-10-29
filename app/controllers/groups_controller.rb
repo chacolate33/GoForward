@@ -65,6 +65,7 @@ class GroupsController < ApplicationController
     else
       # グループを削除したことにより表示できない場合はグループ一覧に遷移
       redirect_to groups_path
+    end
   end
 
   def index

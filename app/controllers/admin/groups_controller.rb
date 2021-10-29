@@ -18,6 +18,7 @@ class Admin::GroupsController < ApplicationController
     else
       # グループを削除したことにより表示できない場合はグループ一覧に遷移
       redirect_to admin_root_path
+    end
   end
 
   def destroy
