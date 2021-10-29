@@ -56,7 +56,7 @@ class KnowledgesController < ApplicationController
       @group = Group.find(params[:group_id])
       @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
       @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
-      redirect_to group_phrase_knowledges_path(group_id: @group.id, id: @phrase.id)
+      redirect_to group_phrase_path(group_id: @group.id, id: @phrase.id)
     end
   end
 
