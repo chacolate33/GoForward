@@ -46,20 +46,26 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
-    @leader = User.find_by(id: @group.leader_id)
-    # 承認があればグループリーダーの画面に承認待ち一覧へのボタンを設置
-    @applies = Apply.where(group_id: params[:id])
-    # グループへの加入申請をしていればキャンセルボタンを設置
-    @apply = Apply.find_by(group_id: @group.id, user_id: current_user.id)
-    # 所属ユーザー一覧表示
-    @group_users = GroupUser.where(group_id: @group.id)
-    @users = []
-    @group_users.each do |group_user|
-      user = User.find_by(id: group_user.user_id)
-      @users.push(user)
+    # 表示するべきグループがあれば詳細画面を表示
+    if Group.exists?(params[:id])
+      @group = Group.find(params[:id])
+      @leader = User.find_by(id: @group.leader_id)
+      # 承認があればグループリーダーの画面に承認待ち一覧へのボタンを設置
+      @applies = Apply.where(group_id: params[:id])
+      # グループへの加入申請をしていればキャンセルボタンを設置
+      @apply = Apply.find_by(group_id: @group.id, user_id: current_user.id)
+      # 所属ユーザー一覧表示
+      @group_users = GroupUser.where(group_id: @group.id)
+      @users = []
+      @group_users.each do |group_user|
+        user = User.find_by(id: group_user.user_id)
+        @users.push(user)
+      end
+      @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
+    else
+      # グループを削除したことにより表示できない場合はグループ一覧に遷移
+      redirect_to groups_path
     end
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(20)
   end
 
   def index
