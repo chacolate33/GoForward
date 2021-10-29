@@ -38,22 +38,25 @@ class PhrasesController < ApplicationController
   end
 
   def show
-    @phrase = Phrase.find(params[:id])
-    # 知識の並び替え機能
-    # いいねが多い順
-    @knowledge = Knowledge.new
-    if params[:sort_favorite]
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort do |a, b|
-        b.favorited_knowledges.includes(:favorites).size <=>
-        a.favorited_knowledges.includes(:favorites).size
+    if Phrase.exists?(params[:id])
+      @phrase = Phrase.find(params[:id])
+      # 知識の並び替え機能
+      # いいねが多い順
+      @knowledge = Knowledge.new
+      if params[:sort_favorite]
+        @knowledges = Knowledge.where(phrase_id: @phrase.id).includes(:favorited_knowledges).sort do |a, b|
+          b.favorited_knowledges.includes(:favorites).size <=>
+          a.favorited_knowledges.includes(:favorites).size
+        end
+      # デフォルト(ステータスごと)
+      elsif params[:sort_status]
+        @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
+      else
+        @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
       end
-    # デフォルト(ステータスごと)
-    elsif params[:sort_status]
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
+      @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
     else
-      @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
-    end
-    @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
+      
   end
 
   def destroy

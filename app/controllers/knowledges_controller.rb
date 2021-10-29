@@ -44,15 +44,19 @@ class KnowledgesController < ApplicationController
   end
 
   def show
+    @phrase = Phrase.find(params[:phrase_id])
+    # 表示するべき知識があれば詳細画面を表示
     if Knowledge.exists?(params[:id])
       @knowledge = Knowledge.find(params[:id])
-      @phrase = Phrase.find(params[:phrase_id])
       @comment = Comment.new
       # 知識に対するコメント一覧
       @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
     else
+      # 知識を削除した後にその詳細画面に戻った際のエラーを防ぐ
       @group = Group.find(params[:group_id])
-      redirect_to group_phrases_path(@group.id)
+      @knowledges = Knowledge.where(phrase_id: @phrase.id).order(:status)
+      @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
+      redirect_to group_phrase_knowledges_path(group_id: @group.id, id: @phrase.id)
     end
   end
 
