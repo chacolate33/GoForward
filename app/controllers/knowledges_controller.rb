@@ -65,6 +65,7 @@ class KnowledgesController < ApplicationController
     else
       @group = Group.find(params[:group_id])
       redirect_to group_phrases_path(@group)
+    end
   end
 
   def destroy
