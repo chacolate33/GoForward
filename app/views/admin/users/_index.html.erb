@@ -1,49 +1,51 @@
-<div class="table-responsive">
-  <table class="table-hover text-nowrap center">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Follows</th>
-        <th>Followers</th>
-        <th>Introduction</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% users.each do |user|%>
+<% if users.present? %>
+  <div class="table-responsive">
+    <table class="table-hover text-nowrap center">
+      <thead>
         <tr>
-          <td>
-            <%= link_to admin_user_path(user.id) do %>
-              <%= attachment_image_tag user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
-              <%= user.name %>
-            <% end %>
-          </td>
-          <td>
-            <%= user.email %>
-          </td>
-          <td>
-            <% if user.is_deleted == false %>
-              <p class="fas fa-user-check text-success">有効</p>
-            <% else %>
-              <p class="fas fa-user-check text-danger">退会</p>
-            <% end %>
-          </td>
-          <td>
-            Follows: <%= link_to admin_user_followings_path(user) do %><%= user.followings.count %><% end %>
-          </td>
-          <td>
-            Followers: <%= link_to admin_user_followers_path(user) do %><%= user.followers.count %><% end %>
-          </td>
-          <td>
-            <% if user.introduction.present? %>
-              <%= user.introduction.truncate(30) %>
-            <% end %>
-          </td>
-        <tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Follows</th>
+          <th>Followers</th>
+          <th>Introduction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each do |user|%>
+          <tr>
+            <td>
+              <%= link_to admin_user_path(user.id) do %>
+                <%= attachment_image_tag user, :image, format: 'jpeg', fallback: 'no_image.jpg', size: "60x60"%>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <% if user.is_deleted == false %>
+                <p class="fas fa-user-check text-success">有効</p>
+              <% else %>
+                <p class="fas fa-user-check text-danger">退会</p>
+              <% end %>
+            </td>
+            <td>
+              Follows: <%= link_to admin_user_followings_path(user) do %><%= user.followings.count %><% end %>
+            </td>
+            <td>
+              Followers: <%= link_to admin_user_followers_path(user) do %><%= user.followers.count %><% end %>
+            </td>
+            <td>
+              <% if user.introduction.present? %>
+                <%= user.introduction.truncate(30) %>
+              <% end %>
+            </td>
+          <tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
 <%= paginate users %>
