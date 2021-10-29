@@ -45,7 +45,7 @@ class Admin::PhrasesController < ApplicationController
       end
       @knowledges = Kaminari.paginate_array(@knowledges).page(params[:page]).per(20)
     else
-    　# プレーズを削除して、それが存在しない場合は、フレーズ一覧に遷移してエラーを防ぐ
+      # プレーズを削除して、それが存在しない場合は、フレーズ一覧に遷移してエラーを防ぐ
       @group = Group.find(params[:group_id])
       redirect_to admin_group_phrases_path(@group)
     end
