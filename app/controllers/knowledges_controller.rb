@@ -50,8 +50,8 @@ class KnowledgesController < ApplicationController
       @comment = Comment.new
       # 知識に対するコメント一覧
       @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
-    else 
-      @group = Group.find(params[:group:_id])
+    else
+      @group = Group.find(params[:group_id])
       redirect_to group_phrases_path(@group.id)
     end
   end
