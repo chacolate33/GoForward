@@ -44,11 +44,16 @@ class KnowledgesController < ApplicationController
   end
 
   def show
-    @knowledge = Knowledge.find(params[:id])
-    @phrase = Phrase.find(params[:phrase_id])
-    @comment = Comment.new
-    # 知識に対するコメント一覧
-    @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
+    if Knowledge.find(params[:id]).exists?
+      @knowledge = Knowledge.find(params[:id])
+      @phrase = Phrase.find(params[:phrase_id])
+      @comment = Comment.new
+      # 知識に対するコメント一覧
+      @comments = Comment.where(knowledge_id: @knowledge.id).page(params[:page]).per(20)
+    else 
+      @group = Group.find(params[:group:_id])
+      redirect_to group_phrases_path(@group.id)
+    end
   end
 
   def destroy

@@ -10,10 +10,10 @@ class Users::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     if @user
       if @user.valid_password?(params[:user][:password]) && @user.active_for_authentication? == false
-        flash[:notice] = '退会済みです。再度ご登録をしてご利用ください。'
+        flash[:notice] = 'You have withdrawn. Please register using another email.'
         redirect_to new_user_session_path
       else
-        flash[:notice] = '項目を入力してください'
+        flash[:notice] = 'Enter the informatiom.'
       end
     end
   end
