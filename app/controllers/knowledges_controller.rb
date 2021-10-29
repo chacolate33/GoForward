@@ -44,7 +44,7 @@ class KnowledgesController < ApplicationController
   end
 
   def show
-    if Knowledge.find(params[:id]).exists?
+    if Knowledge.exists?(params[:id])
       @knowledge = Knowledge.find(params[:id])
       @phrase = Phrase.find(params[:phrase_id])
       @comment = Comment.new
