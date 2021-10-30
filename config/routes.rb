@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :rooms, only: [:create, :show]
 
   resources :groups do
+    get 'phrases/:id/knowledges' => 'phrases#show'
     resources :applies, only: [:index, :create, :destroy]
     resources :phrases, except: [:new] do
       resource :bookmarks, only: [:create, :destroy]
