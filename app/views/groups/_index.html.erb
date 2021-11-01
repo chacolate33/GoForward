@@ -8,7 +8,7 @@
         <th>Details</th>
       </tr>
     </thead>
-    
+
     <tbody>
       <% groups.each do |group| %>
         <tr>
@@ -43,7 +43,7 @@
               <% end %>
 
               <% if GroupUser.exists?(group_id: group.id, user_id: current_user.id) %>
-                <%= link_to "退出する", group_user_path(id: id, group_id: group.id), method: :delete, class: 'btn btn-danger' %>
+                <%= link_to "leave", group_user_path(id: id, group_id: group.id), method: :delete, class: 'btn btn-danger' %>
               <% end %>
             <% end %>
           </td>
