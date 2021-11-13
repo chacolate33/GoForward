@@ -1,7 +1,8 @@
 <div class="container my-3">
-  <!--どの2人のRoomかを示す-->
+  <!--どのユーザーとのRoomかを示す-->
   <% @entries.each do |e| %>
     <div>
+    　<!--エントリーしている2人のうち、相手の名前だけを表示-->
       <% if e.user != current_user %>
         <h3>
           Chat with
@@ -19,6 +20,7 @@
       <%= form_with model:@message, local:true do |f| %>
         <%= render 'layouts/errors', model: f.object %>
         <%= f.text_field :content, placeholder: "Input messages", class: "form-text-field w-100" %>
+        <!--どのroom内のmessageかを保存するためにmessages/createアクションに送信-->
         <%= f.hidden_field :room_id, value: @room.id %>
         <%= f.submit "投稿", class: 'form_submit btn btn-success my-2' %>
       <% end %>
@@ -33,6 +35,7 @@
                <%= m.user.name %>
             </div>
             <div class="chat-content">
+              <!--メッセージの投稿者が自分か否かで色分け-->
               <% if m.user == current_user %>
                 <div class="border px-1 py-1", style="border-radius: 7px; background-color: #FECFA4;">
                   <%= m.content %>
