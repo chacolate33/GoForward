@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
       @message = Message.new
       @entries = @room.entries
     else
-      権限がないのでtop
+      # 権限がないのでtop
       redirect_to root_path
     end
   end

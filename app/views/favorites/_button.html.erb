@@ -1,7 +1,7 @@
 <% if knowledge.favorited_by?(current_user) %>
   <span>
     <%= link_to group_phrase_knowledge_favorites_path(phrase_id: knowledge.phrase_id, knowledge_id: knowledge.id), class: 'underline', method: :delete, remote: true do %>
-    <i class="fas fa-heart text-danger"><%= knowledge.favorites.count %></i>
+      <i class="fas fa-heart text-danger"><%= knowledge.favorites.count %></i>
     <% end %>
   </span>
 <% else %>
