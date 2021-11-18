@@ -22,17 +22,22 @@ class UsersController < ApplicationController
     @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(20)
 
     # 以下DM機能の記述
+    # ログインしているユーザーが誰とDMでつながっているかを取得
     @currentUserEntry = Entry.where(user_id: current_user.id)
+    # 表示しているユーザーが誰とDMでつながっているかを取得する
     @userEntry = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id
+      # 上の2つで取得したデータから、重複するroom番号があれば、ルームは存在し、そのidを付与する
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id
+            # falseの時にroomを作成するための記述
             @isRoom = true
             @roomId = cu.room.id
           end
         end
       end
+      # ルームがなければ(この画面に遷移した時にDMの部屋が存在しない場合)、それを作るための記述
       unless @isRoom
         @room = Room.new
         @entry = Entry.new

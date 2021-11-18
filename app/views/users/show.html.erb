@@ -43,9 +43,12 @@
             <% if @isRoom == true %>
               <a href="/rooms/<%= @roomId %>" class="btn btn-primary">Chat</a>
             <% else %>
+              <!--Chatボタンを初めて押してRoomを作るとき、その情報をroom/createに送信する-->
               <%= form_for @room do |f| %>
-                <%= f.hidden_field :user_id, value: @user.id %>
+                <!--最初にChatボタンを押した人のidがRoomのuser_idになる-->
+                <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= fields_for @entry do |e| %>
+                <!--Room作成と同時に相手ユーザー情報もEntryに保存するため、送信-->
                   <%= e.hidden_field :user_id, value: @user.id %>
                 <% end %>
                 <%= f.submit "Chat", class: 'btn btn-primary user-show-chat'%>
